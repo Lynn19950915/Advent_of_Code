@@ -18,11 +18,11 @@
 <table style="table-layout: fixed">
     <thead>
         <td align="center" width="100vmax">日期</td>
-        <td align="center" width="225vmax">主題</td>
+        <td align="center" width="250vmax">主題</td>
         <td align="center" width="100vmax">第一題</td>
         <td align="center" width="100vmax">第二題</td>
         <td align="center" width="100vmax">介面</td>
-        <td align="center" width="125vmax">原始碼</td>
+        <td align="center" width="100vmax">原始碼</td>
     </thead>
     <tr>
         <td align="center">12/1</td>
