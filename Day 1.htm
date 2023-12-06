@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Day 1: Trebuchet?!</title>
+	<style>
+		.header {
+			margin-top: 60px; text-align: center;
+		}
+		.container {
+			width: 40%; margin: 40px auto; padding: 30px 40px;
+		}
+		a {
+			text-decoration: none;
+		}
+	</style>
+	
+	<script>
+		function execute1(){
+			// 讀取檔案
+			let file=document.getElementById("input1").files[0];
+			let work=new FileReader();
+			
+			work.readAsText(file);
+			work.onload=function() {
+				// 將文檔內容分行切割，收集於陣列內
+				let arr=work.result.split("\n");
+				let sum=0;
+				
+				for(let i=0; i<arr.length; i++){
+					let first=0, last=0, num=0;
+					for(let j=0; j<arr[i].length; j++){
+						if(arr[i][j]>0 && arr[i][j]<10){
+							// 當首次發現數字，將其加進十位數
+							if(first==0){
+								num=arr[i][j]*10; first=arr[i][j]*1;
+							}
+							last=arr[i][j]*1;
+						}
+					}
+					// 補上十位數，並累加該行結果
+					num+=last; sum+=num;
+				}
+				document.getElementById("result1").innerHTML=sum+"！";
+			}
+		}
+		
+		function execute2(){
+			// 讀取檔案
+			let file=document.getElementById("input2").files[0];
+			let work=new FileReader();
+			
+			work.readAsText(file);
+			work.onload=function() {};
+		}
+	</script>
+</head>
+
+<body>
+	<h3 class="header">
+		<a href="https://adventofcode.com/2023/day/1" target="_blank">--- Day 1: Trebuchet?! ---</a>
+	</h3>
+
+	<div class="container" style="background-color: #E0E0E0">
+		<div><b>Part 1</b></div><br>
+		<div style="padding-left: 130px">
+			1. 上傳檔案 (.txt)：<input type="file" id="input1" />
+			<br><br>
+			2. 讀取運算：<button onclick="execute1()">開始</button>
+			<br><br>
+			3. 結果＝ <b><span id="result1">？</span></b>
+		</div>
+	</div>
+	
+	<div class="container" style="background-color: gold; display: none">
+		<div><b>Part 2</b></div><br>
+		<div style="padding-left: 130px">
+			1. 上傳檔案 (.txt)：<input type="file" id="input2" />
+			<br><br>
+			2. 讀取運算：<button onclick="execute2()">開始</button>
+			<br><br>
+			3. 結果＝ <b><span id="result2">？</span></b>
+		</div>
+	</div>
+</body>
+</html>
