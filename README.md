@@ -20,7 +20,7 @@
 <table style="table-layout: fixed">
     <thead>
         <td align="center" width="100vmax">日期</td>
-        <td align="center" width="250vmax">主題</td>
+        <td align="center">主題</td>
         <td align="center" width="100vmax">第一題</td>
         <td align="center" width="100vmax">第二題</td>
         <td align="center" width="100vmax">介面</td>
