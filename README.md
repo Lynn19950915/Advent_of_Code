@@ -1,9 +1,9 @@
 ### 專案簡介
 
-<a href="https://adventofcode.com/" target="_blank">Advent of Code 2023 </a>解題紀錄。
+<a href="https://adventofcode.com/" target="_blank">Advent of Code 2023</a> 解題紀錄。
 
 ```
-[Advent of Code 是什麼]
+[Advent of Code 是什麼？]
 
 為了慶祝聖誕假期的到來，每年 12/1~25 會舉辦此活動
 
@@ -18,16 +18,17 @@
 <table style="table-layout: fixed">
     <thead>
         <td align="center" width="100vmax">日期</td>
-        <td align="center" width="200vmax">主題</td>
+        <td align="center" width="225vmax">主題</td>
 				<td align="center" width="100vmax">第一題</td>
 				<td align="center" width="100vmax">第二題</td>
-        <td align="center" width="150vmax">介面</td>
-				<td align="center" width="150vmax">原始碼</td>
+        <td align="center" width="125vmax">介面</td>
+				<td align="center" width="125vmax">原始碼</td>
     </thead>
     <tr>
         <td align="center">12/1</td>
         <td align="center">Day 1: Trebuchet?!</td>
 				<td align="center">✔</td>
+				<td align="center"></td>
         <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%201.htm">點我</a></td>
         <td align="center"><a href="Day%201.htm">點我</a></td>
     </tr>
