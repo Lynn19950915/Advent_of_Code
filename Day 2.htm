@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Day 1: Trebuchet?!</title>
+	<title>Day 2: Cube Conundrum</title>
 	<style>
 		.header {
 			margin-top: 100px; text-align: center;
@@ -24,23 +24,30 @@
 			work.onload=function() {
 				// 將文檔內容分行切割，收集於陣列內
 				let arr=work.result.split("\n");
-				let sum=0;
+				let sum1=0, sum2=0;
 				
 				for(let i=0; i<arr.length; i++){
-					let first=0, last=0, num=0;
-					for(let j=0; j<arr[i].length; j++){
-						if(arr[i][j]>0 && arr[i][j]<10){
-							// 當首次發現數字，將其加進十位數
-							if(first==0){
-								num=arr[i][j]*10; first=arr[i][j]*1;
-							}
-							last=arr[i][j]*1;
-						}
+					// 測試幾輪都沒差，記住各色出現的最大數量就好
+					let info=arr[i].split(":")[1].replaceAll(";", ",");
+					info=info.split(",");
+					let maxR=0, maxG=0, maxB=0;
+					console.log(info);
+					
+					for(let j=0; j<info.length; j++){
+						// \r 符號會影響最末項的比對
+						let item=info[j].replace("\r", "").split(" ");
+						if(item[2]=="red"){maxR=Math.max(item[1]*1, maxR)};
+						if(item[2]=="green"){maxG=Math.max(item[1]*1, maxG)};
+						if(item[2]=="blue"){maxB=Math.max(item[1]*1, maxB)};
 					}
-					// 補上十位數，並累加該行結果
-					num+=last; sum+=num;
+					// 累加符合的遊戲 ID
+					if(maxR<=12 && maxG<=13 && maxB<=14){
+						sum1+=(i+1);
+					}
+					sum2+=(maxR*maxG*maxB);
 				}
-				document.getElementById("result1").innerHTML=sum;
+				document.getElementById("result1").innerHTML=sum1;
+				document.getElementById("result2").innerHTML=sum2;
 			}
 		}
 	</script>
@@ -48,7 +55,7 @@
 
 <body>
 	<h3 class="header">
-		<a href="https://adventofcode.com/2023/day/1" target="_blank">--- Day 1: Trebuchet?! ---</a>
+		<a href="https://adventofcode.com/2023/day/1" target="_blank">--- Day 2: Cube Conundrum ---</a>
 	</h3>
 
 	<div class="container" style="background-color: #E0E0E0">
@@ -65,7 +72,7 @@
 		<div style="text-align: center">
 			Part 1 答案＝ <b><span id="result1">？</span></b>
 			<br><br>
-			Part 2 答案＝ <b><span id="result2" style="border: 2px solid">待解出</span></b>
+			Part 2 答案＝ <b><span id="result2">？</span></b>
 		</div>
 	</div>
 </body>
