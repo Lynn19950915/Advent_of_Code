@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Day 1: Trebuchet?!</title>
+	<title>Day 4: Scratchcards</title>
 	<style>
 		.header {
 			margin-top: 100px; text-align: center;
@@ -31,18 +31,22 @@
 				let sum1=0;
 				
 				for(let i=0; i<arr.length; i++){
-					let first=0, last=0, num=0;
-					for(let j=0; j<arr[i].length; j++){
-						if(arr[i][j]>0 && arr[i][j]<10){
-							// 當首次發現數字，將其加進十位數
-							if(first==0){
-								num=arr[i][j]*10; first=arr[i][j]*1;
-							}
-							last=arr[i][j]*1;
+					let info=arr[i].split(":")[1].split("|");
+		
+					// 將中獎數字收集於 Set (並排除空白)
+					let win=new Set(info[0].split(" ").filter(x=>x.length));
+					let num=info[1].replace("\r", "");
+					num=num.split(" ").filter(x=>x.length);
+					let point=0;
+					
+					for(let j=0; j<num.length; j++){
+						if(win.has(num[j])){
+							// 首次中獎得 1 分，之後每次都翻倍
+							point=(point==0? 1: point*2);
 						}
 					}
-					// 補上十位數，並累加該行結果
-					num+=last; sum1+=num;
+					// 累加每張卡片的點數
+					sum1+=point;
 				}
 				document.getElementById("result1").innerHTML=sum1;
 			}
@@ -52,7 +56,7 @@
 
 <body>
 	<h3 class="header">
-		<a href="https://adventofcode.com/2023/day/1" target="_blank">--- Day 1: Trebuchet?! ---</a>
+		<a href="https://adventofcode.com/2023/day/1" target="_blank">--- Day 4: Scratchcards ---</a>
 	</h3>
 
 	<div class="container" style="background-color: #E0E0E0">
