@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Day 6: Wait For It</title>
+	<style>
+		.header {
+			margin-top: 100px; text-align: center;
+		}
+		.container {
+			width: 40%; margin: 50px auto; padding: 30px 50px;
+		}
+		.answer {
+			border: 1px solid; padding: 4px;
+			font-size: 20px; color: blue;
+		}
+		a {
+			text-decoration: none;
+		}
+	</style>
+	
+	<script>
+		function execute(){
+			// 讀取檔案
+			let file=document.getElementById("input").files[0];
+			let work=new FileReader();
+			
+			work.readAsText(file);
+			work.onload=function() {
+				// 將文檔內容分行切割，收集於陣列內
+				let arr=work.result.split("\n");
+				
+				// 取得比賽秒數、距離資料
+				let time=arr[0].replace("\r", "");
+				let t1=time.split(":")[1].split(" ").filter(x=>x.length);
+				let dis=arr[1].replace("\r", "");
+				let d1=dis.split(":")[1].split(" ").filter(x=>x.length);
+				let product=1;
+				
+				for(let i=0; i<t1.length; i++){
+					// 解方程式：x(time-x)>distance
+					// 範圍下限＝較小根的下一個整數
+					let low1=Math.floor((t1[i]/2)-Math.sqrt(t1[i]*t1[i]-4*d1[i])/2)+1;
+					// 範圍上限＝較大根的上一個整數
+					let high1=Math.ceil((t1[i]/2)+Math.sqrt(t1[i]*t1[i]-4*d1[i])/2)-1;
+					product=product*(high1-low1+1);
+				}
+				
+				let t2=t1.join(""), d2=d1.join("");
+				let low2=Math.floor((t2/2)-Math.sqrt(t2*t2-4*d2)/2)+1;
+				let high2=Math.ceil((t2/2)+Math.sqrt(t2*t2-4*d2)/2)-1;
+				let count=high2-low2+1;
+			
+				document.getElementById("result1").innerHTML=product;
+				document.getElementById("result2").innerHTML=count;
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<h3 class="header">
+		<a href="https://adventofcode.com/2023/day/1" target="_blank">--- Day 6: Wait For It ---</a>
+	</h3>
+
+	<div class="container" style="background-color: #E0E0E0">
+		<div><b>INPUT</b></div><br>
+		<div style="padding-left: 140px">
+			1. 上傳檔案 (.txt)：<input type="file" id="input" />
+			<br><br>
+			2. 讀取運算：<button onclick="execute()">開始</button>
+		</div>
+	</div>
+	
+	<div class="container" style="background-color: gold">
+		<div><b>OUTPUT</b></div><br>
+		<div style="text-align: center">
+			Part 1 答案＝<b><span id="result1" class="answer">？</span></b>
+			<br><br>
+			Part 2 答案＝<b><span id="result2" class="answer">？</span></b>
+		</div>
+	</div>
+</body>
+</html>
