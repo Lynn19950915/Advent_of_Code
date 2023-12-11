@@ -85,9 +85,9 @@
 		<tr>
         <td align="center">12/8</td>
         <td align="center">Day 8: Haunted Wasteland</td>
+				<td align="center">💙</td>
 				<td align="center"></td>
-				<td align="center"></td>
-        <td align="center"></td>
-        <td align="center"></td>
+        <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%208.htm">點我</a></td>
+        <td align="center"><a href="Day%208.htm">點我</td>
     </tr>
 </table>

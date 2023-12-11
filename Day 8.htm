@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Day 8: Haunted Wasteland</title>
+	<style>
+		.header {
+			margin-top: 100px; text-align: center;
+		}
+		.container {
+			width: 40%; margin: 50px auto; padding: 30px 50px;
+		}
+		.answer {
+			border: 1px solid; padding: 4px;
+			font-size: 20px; color: blue;
+		}
+		a {
+			text-decoration: none;
+		}
+	</style>
+	
+	<script>
+		function execute(){
+			// 讀取檔案
+			let file=document.getElementById("input").files[0];
+			let work=new FileReader();
+			
+			work.readAsText(file);
+			work.onload=function() {
+				// 將文檔內容分行切割，收集於陣列內
+				let arr=work.result.split("\n");
+				
+				// 將所有對應關係儲存在 map 中
+				let map={};
+				for(let i=2; i<arr.length; i++){
+					let key=arr[i].split(" ")[0].trim();
+					let vL=arr[i].split("(")[1].split(",")[0];
+					let vR=arr[i].split(",")[1].split(")")[0].trim();
+					map[key]=[vL, vR];
+				}
+				
+				let node="AAA", dir1=arr[0].replace("\r", "");
+				let count1=0;
+				while(node!="ZZZ"){
+					// 利用取餘數，循環向下查找
+					let index1=count1%dir1.length;
+					if(dir1[index1]=="L"){
+						node=map[node][0];
+					}else{
+						node=map[node][1];
+					}
+					count1+=1;
+				}
+				
+				// 多點同時執行運算
+				// let nodes=Object.keys(map).filter(x=>x.endsWith("A")), dir2=arr[0].replace("\r", "");
+				// let count2=0;
+				// while(true){
+				// 	let index2=count2%dir2.length;
+				//	// 各點查找並更新自己位置
+				//	if(dir2[index2]=="L"){
+				//		nodes=nodes.map(x=>map[x][0]);
+				//	}else{
+				//		nodes=nodes.map(x=>map[x][1]);
+				//	}
+				//	count2+=1;
+				//	if(nodes.filter(x=>x.endsWith("Z")).length==4){break};
+				// }
+				
+				document.getElementById("result1").innerHTML=count1;
+				document.getElementById("result2").innerHTML=count2;
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<h3 class="header">
+		<a href="https://adventofcode.com/2023/day/1" target="_blank">--- Day 8: Haunted Wasteland ---</a>
+	</h3>
+
+	<div class="container" style="background-color: #E0E0E0">
+		<div><b>INPUT</b></div><br>
+		<div style="padding-left: 140px">
+			1. 上傳檔案 (.txt)：<input type="file" id="input" />
+			<br><br>
+			2. 讀取運算：<button onclick="execute()">開始</button>
+		</div>
+	</div>
+	
+	<div class="container" style="background-color: gold">
+		<div><b>OUTPUT</b></div><br>
+		<div style="text-align: center">
+			Part 1 答案＝<b><span id="result1" class="answer">？</span></b>
+			<br><br>
+			Part 2 答案＝<b><span id="result2">待解出</span></b>
+		</div>
+	</div>
+</body>
+</html>
