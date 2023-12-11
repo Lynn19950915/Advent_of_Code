@@ -28,7 +28,7 @@
     </thead>
     <tr>
         <td align="center">12/1</td>
-        <td align="center">Day 1: Trebuchet?!</td>
+				<td align="center"><a href="https://adventofcode.com/2023/day/1" target="_blank">Day 1: Trebuchet?!</a></td>
 				<td align="center">💙</td>
 				<td align="center"></td>
         <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%201.htm">點我</a></td>
@@ -36,7 +36,7 @@
     </tr>
 		<tr>
         <td align="center">12/2</td>
-        <td align="center">Day 2: Cube Conundrum</td>
+				<td align="center"><a href="https://adventofcode.com/2023/day/2" target="_blank">Day 2: Cube Conundrum</a></td>
 				<td align="center">💙</td>
 				<td align="center">💛</td>
         <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%202.htm">點我</a></td>
@@ -44,7 +44,7 @@
     </tr>
 		<tr>
         <td align="center">12/3</td>
-        <td align="center">Day 3: Gear Ratios</td>
+				<td align="center"><a href="https://adventofcode.com/2023/day/3" target="_blank">Day 3: Gear Ratios</a></td>
 				<td align="center"></td>
 				<td align="center"></td>
         <td align="center"></td>
@@ -52,7 +52,7 @@
     </tr>
 		<tr>
         <td align="center">12/4</td>
-        <td align="center">Day 4: Scratchcards</td>
+				<td align="center"><a href="https://adventofcode.com/2023/day/4" target="_blank">Day 4: Scratchcards</a></td>
 				<td align="center">💙</td>
 				<td align="center"></td>
         <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%204.htm">點我</a></td>
@@ -60,7 +60,7 @@
     </tr>
 		<tr>
         <td align="center">12/5</td>
-        <td align="center">Day 5: If You Give A Seed A Fertilizer</td>
+				<td align="center"><a href="https://adventofcode.com/2023/day/5" target="_blank">Day 5: If You Give A Seed A Fertilizer</a></td>
 				<td align="center"></td>
 				<td align="center"></td>
         <td align="center"></td>
@@ -68,7 +68,7 @@
     </tr>
 		<tr>
         <td align="center">12/6</td>
-        <td align="center">Day 6: Wait For It</td>
+				<td align="center"><a href="https://adventofcode.com/2023/day/6" target="_blank">Day 6: Wait For It</a></td>
 				<td align="center">💙</td>
 				<td align="center">💛</td>
         <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%206.htm">點我</a></td>
@@ -76,7 +76,7 @@
     </tr>
 		<tr>
         <td align="center">12/7</td>
-        <td align="center">Day 7: Camel Cards</td>
+				<td align="center"><a href="https://adventofcode.com/2023/day/7" target="_blank">Day 7: Camel Cards</a></td>
 				<td align="center"></td>
 				<td align="center"></td>
         <td align="center"></td>
@@ -84,10 +84,34 @@
     </tr>
 		<tr>
         <td align="center">12/8</td>
-        <td align="center">Day 8: Haunted Wasteland</td>
+				<td align="center"><a href="https://adventofcode.com/2023/day/8" target="_blank">Day 8: Haunted Wasteland</a></td>
 				<td align="center">💙</td>
 				<td align="center"></td>
         <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%208.htm">點我</a></td>
         <td align="center"><a href="Day%208.htm">點我</td>
+    </tr>
+		<tr>
+        <td align="center">12/9</td>
+				<td align="center"><a href="https://adventofcode.com/2023/day/9" target="_blank">Day 9: Mirage Maintenance</a></td>
+				<td align="center"></td>
+				<td align="center"></td>
+        <td align="center"></td>
+        <td align="center"></td>
+    </tr>
+		<tr>
+        <td align="center">12/10</td>
+				<td align="center"><a href="https://adventofcode.com/2023/day/10" target="_blank">Day 10: Pipe Maze</a></td>
+				<td align="center"></td>
+				<td align="center"></td>
+        <td align="center"></td>
+        <td align="center"></td>
+    </tr>
+		<tr>
+        <td align="center">12/11</td>
+				<td align="center"><a href="https://adventofcode.com/2023/day/11" target="_blank">Day 11: Cosmic Expansion</a></td>
+				<td align="center"></td>
+				<td align="center"></td>
+        <td align="center"></td>
+        <td align="center"></td>
     </tr>
 </table>

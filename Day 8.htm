@@ -51,23 +51,25 @@
 					count1+=1;
 				}
 				
-				// 多點同時執行運算
-				// let nodes=Object.keys(map).filter(x=>x.endsWith("A")), dir2=arr[0].replace("\r", "");
-				// let count2=0;
-				// while(true){
-				// 	let index2=count2%dir2.length;
-				//	// 各點查找並更新自己位置
-				//	if(dir2[index2]=="L"){
-				//		nodes=nodes.map(x=>map[x][0]);
-				//	}else{
-				//		nodes=nodes.map(x=>map[x][1]);
-				//	}
-				//	count2+=1;
-				//	if(nodes.filter(x=>x.endsWith("Z")).length==4){break};
-				// }
+				// 多點執行運算
+//				let nodes=Object.keys(map).filter(x=>x.endsWith("A")), dir2=arr[0].replace("\r", "");
+//				let count2=1;
+//				for(let j=0; j<nodes.length; j++){
+//					let time=0;
+//					while(!nodes[j].endsWith("Z")){
+//						let index2=time%dir2.length;
+//						if(dir2[index2]=="L"){
+//							nodes[j]=map[nodes[j]][0];
+//						}else{
+//							nodes[j]=map[nodes[j]][1];
+//						}
+//						time+=1;
+//					}
+//					count2=count2*time%(1000000007);
+//				}
 				
 				document.getElementById("result1").innerHTML=count1;
-				document.getElementById("result2").innerHTML=count2;
+//				document.getElementById("result2").innerHTML=BigInt(count2);
 			}
 		}
 	</script>
