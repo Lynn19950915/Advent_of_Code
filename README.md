@@ -31,16 +31,16 @@
 				<td align="center"><a href="https://adventofcode.com/2023/day/1" target="_blank">Day 1: Trebuchet?!</a></td>
 				<td align="center">💙</td>
 				<td align="center"></td>
-        <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%201.htm">點我</a></td>
-        <td align="center"><a href="Day%201.htm">點我</a></td>
+        <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%2001.htm">點我</a></td>
+        <td align="center"><a href="Day%2001.htm">點我</a></td>
     </tr>
 		<tr>
         <td align="center">12/2</td>
 				<td align="center"><a href="https://adventofcode.com/2023/day/2" target="_blank">Day 2: Cube Conundrum</a></td>
 				<td align="center">💙</td>
 				<td align="center">💛</td>
-        <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%202.htm">點我</a></td>
-        <td align="center"><a href="Day%202.htm">點我</td>
+        <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%2002.htm">點我</a></td>
+        <td align="center"><a href="Day%2002.htm">點我</td>
     </tr>
 		<tr>
         <td align="center">12/3</td>
@@ -55,8 +55,8 @@
 				<td align="center"><a href="https://adventofcode.com/2023/day/4" target="_blank">Day 4: Scratchcards</a></td>
 				<td align="center">💙</td>
 				<td align="center">💛</td>
-        <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%204.htm">點我</a></td>
-        <td align="center"><a href="Day%204.htm">點我</td>
+        <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%2004.htm">點我</a></td>
+        <td align="center"><a href="Day%2004.htm">點我</td>
     </tr>
 		<tr>
         <td align="center">12/5</td>
@@ -71,8 +71,8 @@
 				<td align="center"><a href="https://adventofcode.com/2023/day/6" target="_blank">Day 6: Wait For It</a></td>
 				<td align="center">💙</td>
 				<td align="center">💛</td>
-        <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%206.htm">點我</a></td>
-        <td align="center"><a href="Day%206.htm">點我</td>
+        <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%2006.htm">點我</a></td>
+        <td align="center"><a href="Day%2006.htm">點我</td>
     </tr>
 		<tr>
         <td align="center">12/7</td>
@@ -87,8 +87,8 @@
 				<td align="center"><a href="https://adventofcode.com/2023/day/8" target="_blank">Day 8: Haunted Wasteland</a></td>
 				<td align="center">💙</td>
 				<td align="center"></td>
-        <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%208.htm">點我</a></td>
-        <td align="center"><a href="Day%208.htm">點我</td>
+        <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%2008.htm">點我</a></td>
+        <td align="center"><a href="Day%2008.htm">點我</td>
     </tr>
 		<tr>
         <td align="center">12/9</td>
@@ -113,5 +113,37 @@
 				<td align="center"></td>
         <td align="center"></td>
         <td align="center"></td>
+    </tr>
+		<tr>
+        <td align="center">12/12</td>
+				<td align="center"><a href="https://adventofcode.com/2023/day/12" target="_blank">Day 12: Hot Springs</a></td>
+				<td align="center"></td>
+				<td align="center"></td>
+        <td align="center"></td>
+        <td align="center"></td>
+    </tr>
+		<tr>
+        <td align="center">12/13</td>
+				<td align="center"><a href="https://adventofcode.com/2023/day/13" target="_blank">Day 13: Point of Incidence</a></td>
+				<td align="center"></td>
+				<td align="center"></td>
+        <td align="center"></td>
+        <td align="center"></td>
+    </tr>
+		<tr>
+        <td align="center">12/14</td>
+				<td align="center"><a href="https://adventofcode.com/2023/day/14" target="_blank">Day 14: Parabolic Reflector Dish</a></td>
+				<td align="center"></td>
+				<td align="center"></td>
+        <td align="center"></td>
+        <td align="center"></td>
+    </tr>
+		<tr>
+        <td align="center">12/15</td>
+				<td align="center">💙<a href="https://adventofcode.com/2023/day/15" target="_blank">Day 15: Lens Library</a></td>
+				<td align="center"></td>
+				<td align="center"></td>
+        <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%2015.htm">點我</a></td>
+        <td align="center"><a href="Day%2015.htm">點我</td>
     </tr>
 </table>
