@@ -28,7 +28,7 @@
 			work.onload=function() {
 				// 將文檔內容分行切割，收集於陣列內
 				let arr=work.result.split("\n");
-				let sum1=0;
+				let sum1=0, obj=new Array(arr.length).fill(1), sum2=0;
 				
 				for(let i=0; i<arr.length; i++){
 					let info=arr[i].split(":")[1].split("|");
@@ -37,18 +37,22 @@
 					let win=new Set(info[0].split(" ").filter(x=>x.length));
 					let num=info[1].replace("\r", "");
 					num=num.split(" ").filter(x=>x.length);
-					let point=0;
+					let bingo=0;
 					
+					sum2+=obj[i];
 					for(let j=0; j<num.length; j++){
-						if(win.has(num[j])){
-							// 首次中獎得 1 分，之後每次都翻倍
-							point=(point==0? 1: point*2);
-						}
+						if(win.has(num[j])){bingo++};
 					}
-					// 累加每張卡片的點數
-					sum1+=point;
+					
+					// 將卡片的中獎次數折算為積分
+					sum1+=(bingo>0? 2**(bingo-1): 0);
+					// 依中獎的次數去兌換更多卡片
+					while(bingo>0){
+						obj[i+bingo]+=obj[i]; bingo--;
+					}
 				}
 				document.getElementById("result1").innerHTML=sum1;
+				document.getElementById("result2").innerHTML=sum2;
 			}
 		}
 	</script>
@@ -56,7 +60,7 @@
 
 <body>
 	<h3 class="header">
-		<a href="https://adventofcode.com/2023/day/1" target="_blank">--- Day 4: Scratchcards ---</a>
+		<a href="https://adventofcode.com/2023/day/4" target="_blank">--- Day 4: Scratchcards ---</a>
 	</h3>
 
 	<div class="container" style="background-color: #E0E0E0">
@@ -73,7 +77,7 @@
 		<div style="text-align: center">
 			Part 1 答案＝<b><span id="result1" class="answer">？</span></b>
 			<br><br>
-			Part 2 答案＝<b><span id="result2">待解出</span></b>
+			Part 2 答案＝<b><span id="result2" class="answer">？</span></b>
 		</div>
 	</div>
 </body>

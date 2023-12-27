@@ -50,26 +50,7 @@
 					}
 					count1+=1;
 				}
-				
-				// 多點執行運算
-//				let nodes=Object.keys(map).filter(x=>x.endsWith("A")), dir2=arr[0].replace("\r", "");
-//				let count2=1;
-//				for(let j=0; j<nodes.length; j++){
-//					let time=0;
-//					while(!nodes[j].endsWith("Z")){
-//						let index2=time%dir2.length;
-//						if(dir2[index2]=="L"){
-//							nodes[j]=map[nodes[j]][0];
-//						}else{
-//							nodes[j]=map[nodes[j]][1];
-//						}
-//						time+=1;
-//					}
-//					count2=count2*time%(1000000007);
-//				}
-				
 				document.getElementById("result1").innerHTML=count1;
-//				document.getElementById("result2").innerHTML=BigInt(count2);
 			}
 		}
 	</script>
@@ -77,7 +58,7 @@
 
 <body>
 	<h3 class="header">
-		<a href="https://adventofcode.com/2023/day/1" target="_blank">--- Day 8: Haunted Wasteland ---</a>
+		<a href="https://adventofcode.com/2023/day/8" target="_blank">--- Day 8: Haunted Wasteland ---</a>
 	</h3>
 
 	<div class="container" style="background-color: #E0E0E0">
