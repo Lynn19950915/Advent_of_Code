@@ -28,9 +28,10 @@
 			work.onload=function() {
 				// 將文檔內容分行切割，收集於陣列內
 				let arr=work.result.split("\n");
-				let place=[], empX=[], empY=[];
+				let place1=[], place2=[];
 				
 				// 彙整沒有星球的 X,Y 列
+				let empX=[], empY=[];
 				for(let i=0; i<arr.length; i++){
 					arr[i]=arr[i].trim();
 					if(arr[i].split("#").length==1){
@@ -52,20 +53,24 @@
 					for(let j=0; j<arr[0].length; j++){
 						if(empX[expX]==j){expX++};
 						if(arr[i][j]=="#"){
-							place.push([j+expX, i+expY]);
+							place1.push([j+expX, i+expY]);
+							place2.push([j+999999*expX, i+999999*expY])
 						}
 					}
 				}
 
 				// Manhattan distance
-				let sum1=0;
-				for(let k=0; k<place.length; k++){
-					for(let l=k+1; l<place.length; l++){
-						let dis=Math.abs(place[k][0]-place[l][0])+Math.abs(place[k][1]-place[l][1]);
-						sum1+=dis;
+				let sum1=0, sum2=0;
+				for(let k=0; k<place1.length; k++){
+					for(let l=k+1; l<place1.length; l++){
+						let dis1=Math.abs(place1[k][0]-place1[l][0])+Math.abs(place1[k][1]-place1[l][1]);
+						let dis2=Math.abs(place2[k][0]-place2[l][0])+Math.abs(place2[k][1]-place2[l][1]);
+						sum1+=dis1;
+						sum2+=dis2;
 					}
 				}
 				document.getElementById("result1").innerHTML=sum1;
+				document.getElementById("result2").innerHTML=sum2;
 			}
 		}
 	</script>
@@ -90,7 +95,7 @@
 		<div style="text-align: center">
 			Part 1 答案＝<b><span id="result1" class="answer">？</span></b>
 			<br><br>
-			Part 2 答案＝<b><span id="result2">待解出</span></b>
+			Part 2 答案＝<b><span id="result2" class="answer">待解出</span></b>
 		</div>
 	</div>
 </body>
