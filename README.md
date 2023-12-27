@@ -15,7 +15,9 @@
 
 ### 題解一覽
 
-參考：<a href="https://adventofcode.com/2023/stats" target="blank">每日實時解出人數</a>
+⭐-Earned＝<b>11</b>
+
+參考：<a href="https://adventofcode.com/2023/stats" target="blank">每日實時解出人數</a><br><br>
 
 <table style="table-layout: fixed">
     <thead>
