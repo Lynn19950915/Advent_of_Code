@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Day 9: Mirage Maintenance</title>
+	<style>
+		.header {
+			margin-top: 100px; text-align: center;
+		}
+		.container {
+			width: 40%; margin: 50px auto; padding: 30px 50px;
+		}
+		.answer {
+			border: 1px solid; padding: 4px;
+			font-size: 20px; color: blue;
+		}
+		a {
+			text-decoration: none;
+		}
+	</style>
+	
+	<script>
+		function execute(){
+			// 讀取檔案
+			let file=document.getElementById("input").files[0];
+			let work=new FileReader();
+			
+			work.readAsText(file);
+			work.onload=function() {
+				// 將文檔內容分行切割，收集於陣列內
+				let arr=work.result.split("\n");
+
+				let sum1=0; sum2=0;
+				for(let i=0; i<arr.length; i++){
+					arr[i]=arr[i].replace("\r", "");
+					let numbers=arr[i].split(" ");
+					
+					// 預測數列的下一項，以及最前項
+					let lastNum=parseInt(numbers[numbers.length-1])+findLast(numbers);
+					let firstNum=parseInt(numbers[0])-findFirst(numbers);
+					sum1+=lastNum; sum2+=firstNum;
+				}
+				
+				function findLast(nums){
+					let newNums=[];
+					for(let j=1; j<nums.length; j++){
+						newNums.push(nums[j]-nums[j-1]);
+					}
+					if(new Set(newNums).size==1){
+						return newNums[0];
+					}else{
+						// 繼續往下遞查規律，並接回該值以推算下一項
+						return parseInt(newNums[newNums.length-1])+findLast(newNums);
+					}
+				}
+				function findFirst(nums){
+					let newNums=[];
+					for(let j=1; j<nums.length; j++){
+						newNums.push(nums[j]-nums[j-1]);
+					}
+					if(new Set(newNums).size==1){
+						return newNums[0];
+					}else{
+						return parseInt(newNums[0])-findFirst(newNums);
+					}
+				}
+				
+				document.getElementById("result1").innerHTML=sum1;
+				document.getElementById("result2").innerHTML=sum2;
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<h3 class="header">
+		<a href="https://adventofcode.com/2023/day/8" target="_blank">--- Day 9: Mirage Maintenance ---</a>
+	</h3>
+
+	<div class="container" style="background-color: #E0E0E0">
+		<div><b>INPUT</b></div><br>
+		<div style="padding-left: 140px">
+			1. 上傳檔案 (.txt)：<input type="file" id="input" />
+			<br><br>
+			2. 讀取運算：<button onclick="execute()">開始</button>
+		</div>
+	</div>
+	
+	<div class="container" style="background-color: gold">
+		<div><b>OUTPUT</b></div><br>
+		<div style="text-align: center">
+			Part 1 答案＝<b><span id="result1" class="answer">？</span></b>
+			<br><br>
+			Part 2 答案＝<b><span id="result2" class="answer">？</span></b>
+		</div>
+	</div>
+</body>
+</html>
