@@ -15,7 +15,7 @@
 
 ### 題解一覽
 
-⭐-Earned＝<b>11</b>
+⭐-Earned＝<b>13</b>
 
 參考：<a href="https://adventofcode.com/2023/stats" target="blank">每日實時解出人數</a><br><br>
 
