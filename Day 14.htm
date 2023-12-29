@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Day 14: Parabolic Reflector Dish</title>
+	<style>
+		.header {
+			margin-top: 100px; text-align: center;
+		}
+		.container {
+			width: 40%; margin: 50px auto; padding: 30px 50px;
+		}
+		.answer {
+			border: 1px solid; padding: 4px;
+			font-size: 20px; color: blue;
+		}
+		a {
+			text-decoration: none;
+		}
+	</style>
+	
+	<script>
+		function execute(){
+			// 讀取檔案
+			let file=document.getElementById("input").files[0];
+			let work=new FileReader();
+			
+			work.readAsText(file);
+			work.onload=function() {
+				// 將文檔內容分行切割，收集於陣列內
+				let arr=work.result.split("\r\n");
+				
+				let sum1=0;
+				for(let i=0; i<arr.length; i++){
+					// 這個直列目前有多少障礙物
+					let barrier=0;
+					for(let j=0; j<arr[0].length; j++){
+						if(arr[j][i]=="O"){
+							sum1+=(arr.length-stone);
+							stone++;
+						}
+						// 石頭(含自己)以上都不能堆填了
+						if(arr[j][i]=="#"){
+							stone=j+1;
+						}
+					}
+				}
+				document.getElementById("result1").innerHTML=sum1;
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<h3 class="header">
+		<a href="https://adventofcode.com/2023/day/14" target="_blank">--- Day 14: Parabolic Reflector Dish ---</a>
+	</h3>
+
+	<div class="container" style="background-color: #E0E0E0">
+		<div><b>INPUT</b></div><br>
+		<div style="padding-left: 140px">
+			1. 上傳檔案 (.txt)：<input type="file" id="input" />
+			<br><br>
+			2. 讀取運算：<button onclick="execute()">開始</button>
+		</div>
+	</div>
+	
+	<div class="container" style="background-color: gold">
+		<div><b>OUTPUT</b></div><br>
+		<div style="text-align: center">
+			Part 1 答案＝<b><span id="result1" class="answer">？</span></b>
+			<br><br>
+			Part 2 答案＝<b><span id="result2">待解出</span></b>
+		</div>
+	</div>
+</body>
+</html>

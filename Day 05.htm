@@ -29,7 +29,7 @@
 				// 將文檔內容分行切割，收集於陣列內
 				let arr=work.result.split("\r\n\r\n");
 				// 取得種子清單
-				let seeds=arr[0].split(" ");
+				let seeds1=arr[0].split(" ");
 				
 				let seed2soil=saveCond(arr[1]);
 				let soil2fert=saveCond(arr[2]);
@@ -40,8 +40,8 @@
 				let humid2loc=saveCond(arr[7]);
 				
 				let res1=Infinity;
-				for(let i=1; i<seeds.length; i++){
-					let getSoil=getTransfer(seeds[i], seed2soil);
+				for(let i=1; i<seeds1.length; i++){
+					let getSoil=getTransfer(seeds1[i], seed2soil);
 					let getFert=getTransfer(getSoil, soil2fert);
 					let getWater=getTransfer(getFert, fert2water);
 					let getLight=getTransfer(getWater, water2light);
@@ -75,7 +75,6 @@
 				}
 				
 				document.getElementById("result1").innerHTML=res1;
-				document.getElementById("result2").innerHTML=sum2;
 			}
 		}
 	</script>
@@ -100,7 +99,7 @@
 		<div style="text-align: center">
 			Part 1 答案＝<b><span id="result1" class="answer">？</span></b>
 			<br><br>
-			Part 2 答案＝<b><span id="result2" class="answer">？</span></b>
+			Part 2 答案＝<b><span id="result2">待解出</span></b>
 		</div>
 	</div>
 </body>
