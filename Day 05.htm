@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Day 11: Cosmic Expansion</title>
+	<title>Day 5: If You Give A Seed A Fertilizer</title>
 	<style>
 		.header {
 			margin-top: 100px; text-align: center;
@@ -28,48 +28,22 @@
 			work.onload=function() {
 				// 將文檔內容分行切割，收集於陣列內
 				let arr=work.result.split("\n");
-				let place1=[], place2=[];
+				let seeds=arr[0].split(":")[1];
+				seeds=seeds.trim().replace("\r", "").split(" ");
+				console.log(seeds);
 				
-				// 彙整沒有星球的 X,Y 列
-				let empX=[], empY=[];
-				for(let i=0; i<arr.length; i++){
-					arr[i]=arr[i].trim();
-					if(arr[i].split("#").length==1){
-						empY.push(i);
-					}
-				}
-				for(let j=0; j<arr[0].length; j++){
-					if(arr.filter(x=>x[j]=="#").length==0){
-						empX.push(j);
-					}
-				}
+				console.log(work.result.split("\r\n\r\n"));
 				
-				// 更新膨脹後的 Y 座標
-				let expY=0;
-				for(let i=0; i<arr.length; i++){
-					if(empY[expY]==i){expY++};
-					// 更新膨脹後的 X 座標
-					let expX=0;
-					for(let j=0; j<arr[0].length; j++){
-						if(empX[expX]==j){expX++};
-						if(arr[i][j]=="#"){
-							place1.push([j+expX, i+expY]);
-							place2.push([j+999999*expX, i+999999*expY])
-						}
-					}
-				}
-
-				// Manhattan distance
-				let sum1=0, sum2=0;
-				for(let k=0; k<place1.length; k++){
-					for(let l=k+1; l<place1.length; l++){
-						let dis1=Math.abs(place1[k][0]-place1[l][0])+Math.abs(place1[k][1]-place1[l][1]);
-						let dis2=Math.abs(place2[k][0]-place2[l][0])+Math.abs(place2[k][1]-place2[l][1]);
-						sum1+=dis1;
-						sum2+=dis2;
-					}
-				}
-				document.getElementById("result1").innerHTML=sum1;
+//				for(let i=0; i<arr.length; i++){
+//					let info=arr[i].split(" ");
+//					console.log(seed>=info[1] && seed<=info[1]*1+info[2]*1-1);
+//				}
+//				
+//				function transfer(from, to, rules, index){
+//					
+//				}
+				
+				document.getElementById("result1").innerHTML=sum;
 				document.getElementById("result2").innerHTML=sum2;
 			}
 		}
@@ -78,7 +52,7 @@
 
 <body>
 	<h3 class="header">
-		<a href="https://adventofcode.com/2023/day/11" target="_blank">--- Day 11: Cosmic Expansion ---</a>
+		<a href="https://adventofcode.com/2023/day/5" target="_blank">--- Day 5: If You Give A Seed A Fertilizer ---</a>
 	</h3>
 
 	<div class="container" style="background-color: #E0E0E0">
