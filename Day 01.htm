@@ -28,8 +28,8 @@
 			work.onload=function() {
 				// 將文檔內容分行切割，收集於陣列內
 				let arr=work.result.split("\n");
-				let sum1=0;
 				
+				let sum1=0;
 				for(let i=0; i<arr.length; i++){
 					let first=0, last=0, num=0;
 					for(let j=0; j<arr[i].length; j++){
@@ -43,6 +43,45 @@
 					}
 					// 補上十位數，並累加該行結果
 					num+=last; sum1+=num;
+				}
+				
+				// 目前問題：
+				// 有字母共用時，無法全數匹配出，例如 nineightwone 僅能找出 92
+				
+				let map={"one":1, "two":2, "three":3, "four":4, "five":5, "six":6, "seven":7, "eight":8, "nine":9};
+				let sum2=0;
+				for(let k=0; k<arr.length; k++){
+					let number=/[1-9]/g;
+					let alpha=/(one)|(two)|(three)|(four)|(five)|(six)|(seven)|(eight)|(nine)/g;
+					// 取得兩組匹配的陣列
+					let numberArr=arr[k].match(number);
+					let alphaArr=arr[k].match(alpha);
+					
+					// 第一個出現數字之型態
+					let firstFind="";
+					if(!numberArr){firstFind="alpha"};
+					if(!alphaArr){firstFind="number"};
+					if(numberArr && alphaArr){
+						firstFind=arr[k].indexOf(numberArr[0])<arr[k].indexOf(alphaArr[0])? "number": "alpha";
+					}
+					if(firstFind=="number"){
+						sum2+=(numberArr[0]*10);
+					}else{
+						sum2+=(map[alphaArr[0]]*10);
+					}
+					
+					// 最後一個出現數字之型態
+					let lastFind="";
+					if(!numberArr){lastFind="alpha"};
+					if(!alphaArr){lastFind="number"};
+					if(numberArr && alphaArr){
+						lastFind=arr[k].lastIndexOf(numberArr[numberArr.length-1])>arr[k].lastIndexOf(alphaArr[alphaArr.length-1])? "number": "alpha";
+					}
+					if(lastFind=="number"){
+						sum2+=(numberArr[numberArr.length-1]*1);
+					}else{
+						sum2+=(map[alphaArr[alphaArr.length-1]]*1);
+					}
 				}
 				document.getElementById("result1").innerHTML=sum1;
 			}
