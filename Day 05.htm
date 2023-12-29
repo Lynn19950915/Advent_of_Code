@@ -50,6 +50,8 @@
 					let getLoc=getTransfer(getHumid, humid2loc);
 					res1=Math.min(getLoc, res1);
 				}
+				// 目前問題：
+				// 起始種子數量過多，無法逐一執行並比較
 				
 				function saveCond(array){
 					let row=array.split("\r\n");
