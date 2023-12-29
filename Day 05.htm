@@ -27,23 +27,54 @@
 			work.readAsText(file);
 			work.onload=function() {
 				// 將文檔內容分行切割，收集於陣列內
-				let arr=work.result.split("\n");
-				let seeds=arr[0].split(":")[1];
-				seeds=seeds.trim().replace("\r", "").split(" ");
-				console.log(seeds);
+				let arr=work.result.split("\r\n\r\n");
+				// 取得種子清單
+				let seeds=arr[0].split(" ");
 				
-				console.log(work.result.split("\r\n\r\n"));
+				let seed2soil=saveCond(arr[1]);
+				let soil2fert=saveCond(arr[2]);
+				let fert2water=saveCond(arr[3]);
+				let water2light=saveCond(arr[4]);
+				let light2temp=saveCond(arr[5]);
+				let temp2humid=saveCond(arr[6]);
+				let humid2loc=saveCond(arr[7]);
 				
-//				for(let i=0; i<arr.length; i++){
-//					let info=arr[i].split(" ");
-//					console.log(seed>=info[1] && seed<=info[1]*1+info[2]*1-1);
-//				}
-//				
-//				function transfer(from, to, rules, index){
-//					
-//				}
+				let res1=Infinity;
+				for(let i=1; i<seeds.length; i++){
+					let getSoil=getTransfer(seeds[i], seed2soil);
+					let getFert=getTransfer(getSoil, soil2fert);
+					let getWater=getTransfer(getFert, fert2water);
+					let getLight=getTransfer(getWater, water2light);
+					let getTemp=getTransfer(getLight, light2temp);
+					let getHumid=getTransfer(getTemp, temp2humid);
+					let getLoc=getTransfer(getHumid, humid2loc);
+					res1=Math.min(getLoc, res1);
+				}
 				
-				document.getElementById("result1").innerHTML=sum;
+				function saveCond(array){
+					let row=array.split("\r\n");
+					let list=[];
+					
+					// 逐行收集對應的條件
+					for(let j=1; j<row.length; j++){
+						let item=[];
+						let info=row[j].split(" ");
+						item.push(info[1], info[2], info[0]);
+						list.push(item);
+					}
+					return list;
+				}
+				function getTransfer(pos, condName){
+					for(let k=0; k<condName.length; k++){
+						if(pos>=condName[k][0]*1 && pos<condName[k][0]*1+condName[k][1]*1){
+							return pos-condName[k][0]*1+condName[k][2]*1;
+						}
+					}
+					// 若不在對應範圍中，則輸出原值
+					return pos;
+				}
+				
+				document.getElementById("result1").innerHTML=res1;
 				document.getElementById("result2").innerHTML=sum2;
 			}
 		}
