@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Day 3: Gear Ratios</title>
+	<style>
+		.header {
+			margin-top: 100px; text-align: center;
+		}
+		.container {
+			width: 40%; margin: 50px auto; padding: 30px 50px;
+		}
+		.answer {
+			border: 1px solid; padding: 4px;
+			font-size: 20px; color: blue;
+		}
+		a {
+			text-decoration: none;
+		}
+	</style>
+	
+	<script>
+		function execute(){
+			// 讀取檔案
+			let file=document.getElementById("input").files[0];
+			let work=new FileReader();
+			
+			work.readAsText(file);
+			work.onload=function() {
+				// 將文檔內容分行切割，收集於陣列內
+				let arr=work.result.split("\r\n");
+				
+				let numbers=[];
+				for(let i=0; i<arr.length; i++){
+					let numNow=false, num=0;
+					for(let j=0; j<arr[i].length; j++){
+						if(arr[i][j]*1>=0 && arr[i][j]*1<=9){
+							numNow=true;
+							num=num*10+arr[i][j]*1;
+						}else{
+							// 當數字一中斷，隨即記錄其座標 (行數、起終位置)
+							if(numNow){
+								let start=j-(Math.floor(Math.log10(num))+1);
+								let end=j-1;
+								numbers.push([num, i, start, end]);
+							}
+							numNow=false; num=0;
+						}
+					}
+					// 該行結束時，也強制記下現有的數字與位置
+					if(numNow){
+						let start=arr[i].length-(Math.floor(Math.log10(num))+1);
+						let end=arr[i].length-1;
+						numbers.push([num, i, start, end]);
+					}
+				}
+				let sum1=0;
+				for(let k=0; k<numbers.length; k++){
+					let res=findSymbol(numbers[k]);
+					sum1+=(numbers[k][0]*=res);
+				}
+				
+				function findSymbol(array){
+					let count=0;
+					// 確保行、列檢測的邊界
+					let startRow=Math.max(0, array[1]-1);
+					let endRow=Math.min(arr.length-1, array[1]+1);
+					let startInd=Math.max(0, array[2]-1);
+					let endInd=Math.min(arr[0].length-1, array[3]+1);
+					
+					for(let l=startRow; l<=endRow; l++){
+						for(let m=startInd; m<=endInd; m++){
+							// 若不是數字也非頓點，則視為找到符號
+							if(arr[l][m]!="." && !(arr[l][m]*1>=0 && arr[l][m]*1<=9)){
+								count+=1;
+							}
+						}
+					}
+					return count>0;
+				}
+				
+				document.getElementById("result1").innerHTML=sum1;
+				document.getElementById("result2").innerHTML=sum2;
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<h3 class="header">
+		<a href="https://adventofcode.com/2023/day/3" target="_blank">--- Day 3: Gear Ratios ---</a>
+	</h3>
+
+	<div class="container" style="background-color: #E0E0E0">
+		<div><b>INPUT</b></div><br>
+		<div style="padding-left: 140px">
+			1. 上傳檔案 (.txt)：<input type="file" id="input" />
+			<br><br>
+			2. 讀取運算：<button onclick="execute()">開始</button>
+		</div>
+	</div>
+	
+	<div class="container" style="background-color: gold">
+		<div><b>OUTPUT</b></div><br>
+		<div style="text-align: center">
+			Part 1 答案＝<b><span id="result1" class="answer">？</span></b>
+			<br><br>
+			Part 2 答案＝<b><span id="result2" class="answer">？</span></b>
+		</div>
+	</div>
+</body>
+</html>
