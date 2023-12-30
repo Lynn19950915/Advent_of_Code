@@ -45,45 +45,49 @@
 					num+=last; sum1+=num;
 				}
 				
-				// 目前問題：
-				// 有字母共用時，無法全數匹配出，例如 nineightwone 僅能找出 92
-				
 				let map={"one":1, "two":2, "three":3, "four":4, "five":5, "six":6, "seven":7, "eight":8, "nine":9};
 				let sum2=0;
 				for(let k=0; k<arr.length; k++){
 					let number=/[1-9]/g;
-					let alpha=/(one)|(two)|(three)|(four)|(five)|(six)|(seven)|(eight)|(nine)/g;
+					let alpha=/^(one)|^(two)|^(three)|^(four)|^(five)|^(six)|^(seven)|^(eight)|^(nine)/;
 					// 取得兩組匹配的陣列
 					let numberArr=arr[k].match(number);
-					let alphaArr=arr[k].match(alpha);
+					let alphaArr=[];
+					// 字母可能共用，使用 match 無法全數匹配出
+					for(let l=0; l<arr[k].length; l++){
+						if(arr[k].substr(l).match(alpha)){
+							alphaArr.push([l, arr[k].substr(l).match(alpha)[0]]);
+						}
+					}
 					
 					// 第一個出現數字之型態
 					let firstFind="";
 					if(!numberArr){firstFind="alpha"};
-					if(!alphaArr){firstFind="number"};
-					if(numberArr && alphaArr){
-						firstFind=arr[k].indexOf(numberArr[0])<arr[k].indexOf(alphaArr[0])? "number": "alpha";
+					if(!alphaArr.length){firstFind="number"};
+					if(!firstFind){
+						firstFind=arr[k].indexOf(numberArr[0])<alphaArr[0][0]? "number": "alpha";
 					}
 					if(firstFind=="number"){
 						sum2+=(numberArr[0]*10);
 					}else{
-						sum2+=(map[alphaArr[0]]*10);
+						sum2+=(map[alphaArr[0][1]]*10);
 					}
 					
 					// 最後一個出現數字之型態
 					let lastFind="";
 					if(!numberArr){lastFind="alpha"};
-					if(!alphaArr){lastFind="number"};
-					if(numberArr && alphaArr){
-						lastFind=arr[k].lastIndexOf(numberArr[numberArr.length-1])>arr[k].lastIndexOf(alphaArr[alphaArr.length-1])? "number": "alpha";
+					if(!alphaArr.length){lastFind="number"};
+					if(!lastFind){
+						lastFind=arr[k].lastIndexOf(numberArr[numberArr.length-1])>alphaArr[alphaArr.length-1][0]? "number": "alpha";
 					}
 					if(lastFind=="number"){
 						sum2+=(numberArr[numberArr.length-1]*1);
 					}else{
-						sum2+=(map[alphaArr[alphaArr.length-1]]*1);
+						sum2+=(map[alphaArr[alphaArr.length-1][1]]*1);
 					}
 				}
 				document.getElementById("result1").innerHTML=sum1;
+				document.getElementById("result2").innerHTML=sum2;
 			}
 		}
 	</script>
@@ -108,7 +112,7 @@
 		<div style="text-align: center">
 			Part 1 答案＝<b><span id="result1" class="answer">？</span></b>
 			<br><br>
-			Part 2 答案＝<b><span id="result2">待解出</span></b>
+			Part 2 答案＝<b><span id="result2" class="answer">？</span></b>
 		</div>
 	</div>
 </body>
