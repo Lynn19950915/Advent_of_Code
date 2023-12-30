@@ -29,6 +29,7 @@
 				// 將文檔內容分行切割，收集於陣列內
 				let arr=work.result.split("\n");
 				
+				// --- PART 1 ---
 				let sum1=0;
 				for(let i=0; i<arr.length; i++){
 					let first=0, last=0, num=0;
@@ -45,6 +46,7 @@
 					num+=last; sum1+=num;
 				}
 				
+				// --- PART 2 ---
 				let map={"one":1, "two":2, "three":3, "four":4, "five":5, "six":6, "seven":7, "eight":8, "nine":9};
 				let sum2=0;
 				for(let k=0; k<arr.length; k++){
@@ -60,7 +62,7 @@
 						}
 					}
 					
-					// 第一個出現數字之型態
+					// 第一個出現數字之型態，並累積數字
 					let firstFind="";
 					if(!numberArr){firstFind="alpha"};
 					if(!alphaArr.length){firstFind="number"};
@@ -73,7 +75,7 @@
 						sum2+=(map[alphaArr[0][1]]*10);
 					}
 					
-					// 最後一個出現數字之型態
+					// 最後一個出現數字之型態，並累積數字
 					let lastFind="";
 					if(!numberArr){lastFind="alpha"};
 					if(!alphaArr.length){lastFind="number"};
@@ -86,6 +88,7 @@
 						sum2+=(map[alphaArr[alphaArr.length-1][1]]*1);
 					}
 				}
+				
 				document.getElementById("result1").innerHTML=sum1;
 				document.getElementById("result2").innerHTML=sum2;
 			}
