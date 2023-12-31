@@ -30,62 +30,128 @@
 				let arr=work.result.split("\r\n");
 				
 				// --- Part 1 ---
-				let five=[];  // AAAAA
-				let four=[];  // AAAAB
-				let full=[];  // AAABB
-				let three=[]; // AAABC
-				let two=[];   // AABBC
-				let one=[];   // AABCD
-				let none=[];  // ABCDE
+				let five1=[];  // AAAAA
+				let four1=[];  // AAAAB
+				let full1=[];  // AAABB
+				let three1=[]; // AAABC
+				let two1=[];   // AABBC
+				let one1=[];   // AABCD
+				let none1=[];  // ABCDE
 				
 				for(let i=0; i<arr.length; i++){
 					// 計算各點數的出現次數
-					let bucket=new Array(13).fill(0);
-					let card=arr[i].split(" ")[0];
-					let point=arr[i].split(" ")[1];
+					let bucket1=new Array(13).fill(0);
+					let card1=arr[i].split(" ")[0];
+					let point1=arr[i].split(" ")[1];
 					
-					for(let j=0; j<card.length; j++){
-						if(card[j]*1<=9){
-							bucket[card[j]*1-1]++;
+					for(let j=0; j<card1.length; j++){
+						if(card1[j]*1<=9){
+							bucket1[card1[j]*1-1]++;
 						}
-						if(card[j]=="A"){bucket[0]++};
-						if(card[j]=="T"){bucket[9]++};
-						if(card[j]=="J"){bucket[10]++};
-						if(card[j]=="Q"){bucket[11]++};
-						if(card[j]=="K"){bucket[12]++};
+						if(card1[j]=="A"){bucket1[0]++};
+						if(card1[j]=="T"){bucket1[9]++};
+						if(card1[j]=="J"){bucket1[10]++};
+						if(card1[j]=="Q"){bucket1[11]++};
+						if(card1[j]=="K"){bucket1[12]++};
 					}
 					
 					// 卡牌的型態分類
-					if(bucket.filter(x=>x==5).length){
-						five.push([card, point]);
-					}else if(bucket.filter(x=>x==4).length){
-						four.push([card, point]);
-					}else if(bucket.filter(x=>x==3).length){
-						if(bucket.filter(x=>x==2).length){
-							full.push([card, point]);
+					if(bucket1.filter(x=>x==5).length){
+						five1.push([card1, point1]);
+					}else if(bucket1.filter(x=>x==4).length){
+						four1.push([card1, point1]);
+					}else if(bucket1.filter(x=>x==3).length){
+						if(bucket1.filter(x=>x==2).length){
+							full1.push([card1, point1]);
 						}else{
-							three.push([card, point]);
+							three1.push([card1, point1]);
 						}
-					}else if(bucket.filter(x=>x==2).length==2){
-						two.push([card, point]);
-					}else if(bucket.filter(x=>x==2).length){
-						one.push([card, point]);
+					}else if(bucket1.filter(x=>x==2).length==2){
+						two1.push([card1, point1]);
+					}else if(bucket1.filter(x=>x==2).length){
+						one1.push([card1, point1]);
 					}else{
-						none.push([card, point]);
+						none1.push([card1, point1]);
 					}
 				}
 				
-				let sum1=0, weight=1;
-				let res1=sortCard(none, weight); sum1+=res1[0];
-				let res2=sortCard(one, res1[1]); sum1+=res2[0];
-				let res3=sortCard(two, res2[1]); sum1+=res3[0];
-				let res4=sortCard(three, res3[1]); sum1+=res4[0];
-				let res5=sortCard(full, res4[1]); sum1+=res5[0];
-				let res6=sortCard(four, res5[1]); sum1+=res6[0];
-				let res7=sortCard(five, res6[1]); sum1+=res7[0];
+				let sum1=0, order1="23456789TJQKA", weight1=1;
+				let res1A=sortCard(none1, order1, weight1); sum1+=res1A[0];
+				let res1B=sortCard(one1, order1, res1A[1]); sum1+=res1B[0];
+				let res1C=sortCard(two1, order1, res1B[1]); sum1+=res1C[0];
+				let res1D=sortCard(three1, order1, res1C[1]); sum1+=res1D[0];
+				let res1E=sortCard(full1, order1, res1D[1]); sum1+=res1E[0];
+				let res1F=sortCard(four1, order1, res1E[1]); sum1+=res1F[0];
+				let res1G=sortCard(five1, order1, res1F[1]); sum1+=res1G[0];
 				
-				function sortCard(arr, weight){
-					let order="23456789TJQKA";					
+				// --- Part 2 ---
+				let five2=[];  // AAAAA
+				let four2=[];  // AAAAB
+				let full2=[];  // AAABB
+				let three2=[]; // AAABC
+				let two2=[];   // AABBC
+				let one2=[];   // AABCD
+				let none2=[];  // ABCDE
+				
+				for(let k=0; k<arr.length; k++){
+					// 計算各點數的出現次數
+					let bucket2=new Array(13).fill(0);
+					let card2=arr[k].split(" ")[0];
+					let point2=arr[k].split(" ")[1];
+					
+					for(let l=0; l<card2.length; l++){
+						if(card2[l]*1<=9){
+							bucket2[card2[l]*1-1]++;
+						}
+						if(card2[l]=="A"){bucket2[0]++};
+						if(card2[l]=="T"){bucket2[9]++};
+						if(card2[l]=="J"){bucket2[10]++};
+						if(card2[l]=="Q"){bucket2[11]++};
+						if(card2[l]=="K"){bucket2[12]++};
+					}
+					
+					// J 會轉換成除它以外，次數最多的牌
+					let max=0, maxIndex=-1;
+					for(let m=0; m<bucket2.length; m++){
+						if(m!=10 && bucket2[m]>max){
+							max=bucket2[m]; maxIndex=m;
+						}
+					}
+					bucket2[maxIndex]+=bucket2[10];
+					bucket2[10]=0;
+					// 唯一的例外是 JJJJJ
+					if(maxIndex==-1){bucket2[10]=5};
+					
+					if(bucket2.filter(x=>x==5).length){
+						five2.push([card2, point2]);
+					}else if(bucket2.filter(x=>x==4).length){
+						four2.push([card2, point2]);
+					}else if(bucket2.filter(x=>x==3).length){
+						if(bucket2.filter(x=>x==2).length){
+							full2.push([card2, point2]);
+						}else{
+							three2.push([card2, point2]);
+						}
+					}else if(bucket2.filter(x=>x==2).length==2){
+						two2.push([card2, point2]);
+					}else if(bucket2.filter(x=>x==2).length){
+						one2.push([card2, point2]);
+					}else{
+						none2.push([card2, point2]);
+					}
+				}
+				
+				let sum2=0, order2="J23456789TQKA", weight2=1;
+				let res2A=sortCard(none2, order2, weight2); sum2+=res2A[0];
+				let res2B=sortCard(one2, order2, res2A[1]); sum2+=res2B[0];
+				let res2C=sortCard(two2, order2, res2B[1]); sum2+=res2C[0];
+				let res2D=sortCard(three2, order2, res2C[1]); sum2+=res2D[0];
+				let res2E=sortCard(full2, order2, res2D[1]); sum2+=res2E[0];
+				let res2F=sortCard(four2, order2, res2E[1]); sum2+=res2F[0];
+				let res2G=sortCard(five2, order2, res2F[1]); sum2+=res2G[0];
+				
+				function sortCard(arr, order, weight){
+					// 依指定的大小規則排序
 					arr.sort((a,b)=>
 						order.indexOf(a[0][0])-order.indexOf(b[0][0]) ||
 						order.indexOf(a[0][1])-order.indexOf(b[0][1]) ||
@@ -94,16 +160,17 @@
 						order.indexOf(a[0][4])-order.indexOf(b[0][4])
 					);
 					
-					// 排序之後依當前權重，累加總金額
+					// 根據當前權重，計算累加總金額
 					let res=0;
 					for(let i=0; i<arr.length; i++){
-						console.log(weight, arr[i][0], arr[i][1]);
+						console.log(arr[i][0], arr[i][1], weight);
 						res+=(weight*arr[i][1]); weight++;
 					}
 					return [res, weight];
 				}
 			
 				document.getElementById("result1").innerHTML=sum1;
+				document.getElementById("result2").innerHTML=sum2;
 			}
 		}
 	</script>

@@ -15,7 +15,7 @@
 
 ### 題解一覽
 
-⭐-Earned＝<b>20</b>
+⭐-Earned＝<b>22</b>
 
 參考：<a href="https://adventofcode.com/2023/stats" target="blank">每日實時解出人數</a><br><br>
 
@@ -80,7 +80,7 @@
         <td align="center">12/7</td>
 				<td align="center"><a href="https://adventofcode.com/2023/day/7" target="_blank">Day 7: Camel Cards</a></td>
 				<td align="center">💙</td>
-				<td align="center"></td>
+				<td align="center">💛</td>
         <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%2007.htm">點我</a></td>
         <td align="center"><a href="Day%2007.htm">點我</td>
     </tr>
