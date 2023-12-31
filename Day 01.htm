@@ -27,7 +27,7 @@
 			work.readAsText(file);
 			work.onload=function() {
 				// 將文檔內容分行切割，收集於陣列內
-				let arr=work.result.split("\n");
+				let arr=work.result.split("\r\n");
 				
 				// --- PART 1 ---
 				let sum1=0;
@@ -47,15 +47,17 @@
 				}
 				
 				// --- PART 2 ---
-				let map={"one":1, "two":2, "three":3, "four":4, "five":5, "six":6, "seven":7, "eight":8, "nine":9};
 				let sum2=0;
+				let map={"one":1, "two":2, "three":3, "four":4, "five":5, "six":6, "seven":7, "eight":8, "nine":9};
+				
 				for(let k=0; k<arr.length; k++){
 					let number=/[1-9]/g;
 					let alpha=/^(one)|^(two)|^(three)|^(four)|^(five)|^(six)|^(seven)|^(eight)|^(nine)/;
-					// 取得兩組匹配的陣列
+					// 取得該行所有的數字
 					let numberArr=arr[k].match(number);
+					// [Bug] 字母由於共用，導致 match 無法全數匹配出 (nineightwone 只找出 92)
+					// [Sol] 手動比對切割出的段落，是否以英文數字開頭
 					let alphaArr=[];
-					// 字母可能共用，使用 match 無法全數匹配出
 					for(let l=0; l<arr[k].length; l++){
 						if(arr[k].substr(l).match(alpha)){
 							alphaArr.push([l, arr[k].substr(l).match(alpha)[0]]);
