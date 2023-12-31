@@ -27,39 +27,41 @@
 			work.readAsText(file);
 			work.onload=function() {
 				// 將文檔內容分行切割，收集於陣列內
-				let arr=work.result.split("\n");
+				let arr=work.result.split("\r\n");
 
-				let sum1=0; sum2=0;
+				// --- Part 1&2 ---
+				let sum1=0, sum2=0;
 				for(let i=0; i<arr.length; i++){
-					arr[i]=arr[i].replace("\r", "");
 					let numbers=arr[i].split(" ");
-					
-					// 預測數列的下一項，以及最前項
-					let lastNum=parseInt(numbers[numbers.length-1])+findLast(numbers);
+					// 預測數列的下一項，以即最前項
+					let nextNum=parseInt(numbers[numbers.length-1])+findNext(numbers);
 					let firstNum=parseInt(numbers[0])-findFirst(numbers);
-					sum1+=lastNum; sum2+=firstNum;
+					sum1+=nextNum; sum2+=firstNum;
 				}
 				
-				function findLast(nums){
+				function findNext(nums){
 					let newNums=[];
 					for(let j=1; j<nums.length; j++){
 						newNums.push(nums[j]-nums[j-1]);
 					}
+					// 找到公差規律時 return
 					if(new Set(newNums).size==1){
 						return newNums[0];
 					}else{
-						// 繼續往下遞查規律，並接回該值以推算下一項
-						return parseInt(newNums[newNums.length-1])+findLast(newNums);
+						// 繼續呼叫遞查規律，並接回該值以推算下一項
+						return parseInt(newNums[newNums.length-1])+findNext(newNums);
 					}
 				}
 				function findFirst(nums){
 					let newNums=[];
-					for(let j=1; j<nums.length; j++){
-						newNums.push(nums[j]-nums[j-1]);
+					for(let k=1; k<nums.length; k++){
+						newNums.push(nums[k]-nums[k-1]);
 					}
+					// 找到公差規律時 return
 					if(new Set(newNums).size==1){
 						return newNums[0];
 					}else{
+						// 繼續呼叫遞查規律，並接回該值以推算最前項
 						return parseInt(newNums[0])-findFirst(newNums);
 					}
 				}
