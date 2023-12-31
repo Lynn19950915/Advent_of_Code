@@ -29,6 +29,7 @@
 				// 將文檔內容分行切割，收集於陣列內
 				let arr=work.result.split("\r\n");
 				
+				// --- Part 1 ---
 				let numbers=[];
 				for(let i=0; i<arr.length; i++){
 					let numNow=false, num=0;
@@ -46,7 +47,7 @@
 							numNow=false; num=0;
 						}
 					}
-					// 該行結束時，也強制記下現有的數字與位置
+					// 該行結束時，也強制記下現有數字與位置
 					if(numNow){
 						let start=arr[i].length-(Math.floor(Math.log10(num))+1);
 						let end=arr[i].length-1;
@@ -79,7 +80,6 @@
 				}
 				
 				document.getElementById("result1").innerHTML=sum1;
-				document.getElementById("result2").innerHTML=sum2;
 			}
 		}
 	</script>
@@ -104,7 +104,7 @@
 		<div style="text-align: center">
 			Part 1 答案＝<b><span id="result1" class="answer">？</span></b>
 			<br><br>
-			Part 2 答案＝<b><span id="result2" class="answer">？</span></b>
+			Part 2 答案＝<b><span id="result2">待解出</span></b>
 		</div>
 	</div>
 </body>
