@@ -15,7 +15,7 @@
 
 ### 題解一覽
 
-⭐-Earned＝<b>22</b>
+⭐-Earned＝<b>23</b>
 
 參考：<a href="https://adventofcode.com/2023/stats" target="blank">每日實時解出人數</a><br><br>
 
@@ -127,10 +127,10 @@
 		<tr>
         <td align="center">12/13</td>
 				<td align="center"><a href="https://adventofcode.com/2023/day/13" target="_blank">Day 13: Point of Incidence</a></td>
+				<td align="center">💙</td>
 				<td align="center"></td>
-				<td align="center"></td>
-        <td align="center"></td>
-        <td align="center"></td>
+        <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%2013.htm">點我</a></td>
+        <td align="center"><a href="Day%2013.htm">點我</td>
     </tr>
 		<tr>
         <td align="center">12/14</td>
