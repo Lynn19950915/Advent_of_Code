@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Day 7: Camel Cards</title>
+	<style>
+		.header {
+			margin-top: 100px; text-align: center;
+		}
+		.container {
+			width: 40%; margin: 50px auto; padding: 30px 50px;
+		}
+		.answer {
+			border: 1px solid; padding: 4px;
+			font-size: 20px; color: blue;
+		}
+		a {
+			text-decoration: none;
+		}
+	</style>
+	
+	<script>
+		function execute(){
+			// 讀取檔案
+			let file=document.getElementById("input").files[0];
+			let work=new FileReader();
+			
+			work.readAsText(file);
+			work.onload=function() {
+				// 將文檔內容分行切割，收集於陣列內
+				let arr=work.result.split("\r\n");
+				
+				// --- Part 1 ---
+				let five=[];  // AAAAA
+				let four=[];  // AAAAB
+				let full=[];  // AAABB
+				let three=[]; // AAABC
+				let two=[];   // AABBC
+				let one=[];   // AABCD
+				let none=[];  // ABCDE
+				
+				for(let i=0; i<arr.length; i++){
+					// 計算各點數的出現次數
+					let bucket=new Array(13).fill(0);
+					let card=arr[i].split(" ")[0];
+					let point=arr[i].split(" ")[1];
+					
+					for(let j=0; j<card.length; j++){
+						if(card[j]*1<=9){
+							bucket[card[j]*1-1]++;
+						}
+						if(card[j]=="A"){bucket[0]++};
+						if(card[j]=="T"){bucket[9]++};
+						if(card[j]=="J"){bucket[10]++};
+						if(card[j]=="Q"){bucket[11]++};
+						if(card[j]=="K"){bucket[12]++};
+					}
+					
+					// 卡牌的型態分類
+					if(bucket.filter(x=>x==5).length){
+						five.push([card, point]);
+					}else if(bucket.filter(x=>x==4).length){
+						four.push([card, point]);
+					}else if(bucket.filter(x=>x==3).length){
+						if(bucket.filter(x=>x==2).length){
+							full.push([card, point]);
+						}else{
+							three.push([card, point]);
+						}
+					}else if(bucket.filter(x=>x==2).length==2){
+						two.push([card, point]);
+					}else if(bucket.filter(x=>x==2).length){
+						one.push([card, point]);
+					}else{
+						none.push([card, point]);
+					}
+				}
+				
+				let sum1=0, weight=1;
+				let res1=sortCard(none, weight); sum1+=res1[0];
+				let res2=sortCard(one, res1[1]); sum1+=res2[0];
+				let res3=sortCard(two, res2[1]); sum1+=res3[0];
+				let res4=sortCard(three, res3[1]); sum1+=res4[0];
+				let res5=sortCard(full, res4[1]); sum1+=res5[0];
+				let res6=sortCard(four, res5[1]); sum1+=res6[0];
+				let res7=sortCard(five, res6[1]); sum1+=res7[0];
+				
+				function sortCard(arr, weight){
+					let order="23456789TJQKA";					
+					arr.sort((a,b)=>
+						order.indexOf(a[0][0])-order.indexOf(b[0][0]) ||
+						order.indexOf(a[0][1])-order.indexOf(b[0][1]) ||
+						order.indexOf(a[0][2])-order.indexOf(b[0][2]) ||
+						order.indexOf(a[0][3])-order.indexOf(b[0][3]) ||
+						order.indexOf(a[0][4])-order.indexOf(b[0][4])
+					);
+					
+					// 排序之後依當前權重，累加總金額
+					let res=0;
+					for(let i=0; i<arr.length; i++){
+						console.log(weight, arr[i][0], arr[i][1]);
+						res+=(weight*arr[i][1]); weight++;
+					}
+					return [res, weight];
+				}
+			
+				document.getElementById("result1").innerHTML=sum1;
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<h3 class="header">
+		<a href="https://adventofcode.com/2023/day/7" target="_blank">--- Day 7: Camel Cards ---</a>
+	</h3>
+
+	<div class="container" style="background-color: #E0E0E0">
+		<div><b>INPUT</b></div><br>
+		<div style="padding-left: 140px">
+			1. 上傳檔案 (.txt)：<input type="file" id="input" />
+			<br><br>
+			2. 讀取運算：<button onclick="execute()">開始</button>
+		</div>
+	</div>
+	
+	<div class="container" style="background-color: gold">
+		<div><b>OUTPUT</b></div><br>
+		<div style="text-align: center">
+			Part 1 答案＝<b><span id="result1" class="answer">？</span></b>
+			<br><br>
+			Part 2 答案＝<b><span id="result2" class="answer">？</span></b>
+		</div>
+	</div>
+</body>
+</html>
