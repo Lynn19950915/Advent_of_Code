@@ -27,9 +27,9 @@
 			work.readAsText(file);
 			work.onload=function() {
 				// 將文檔內容分行切割，收集於陣列內
-				let arr=work.result.split("\n");
+				let arr=work.result.split("\r\n");
 				
-				// 將所有對應關係儲存在 map 中
+				// 將節點的對應關係儲存在 map 中
 				let map={};
 				for(let i=2; i<arr.length; i++){
 					let key=arr[i].split(" ")[0].trim();
@@ -38,42 +38,45 @@
 					map[key]=[vL, vR];
 				}
 				
-				let node="AAA", dir=arr[0].replace("\r", "");
+				// --- Part 1 ---
+				let node="AAA", dir=arr[0];
 				let count1=0;
 				while(node!="ZZZ"){
-					// 利用取餘數，循環向下查找
+					// 利用取餘數，依指定方向循環向下查找
 					let index1=count1%dir.length;
 					if(dir[index1]=="L"){
 						node=map[node][0];
 					}else{
 						node=map[node][1];
 					}
-					count1+=1;
+					count1++;
 				}
 				
+				// --- Part 2 ---
 				let nodes=Object.keys(map).filter(x=>x.endsWith("A"));
 				let stepAll=[];
 				for(let j=0; j<nodes.length; j++){
 					let step=0;
 					while(!nodes[j].endsWith("Z")){
+						// 利用取餘數，依指定方向循環向下查找
 						let index2=step%dir.length;
 						if(dir[index2]=="L"){
 							nodes[j]=map[nodes[j]][0];
 						}else{
 							nodes[j]=map[nodes[j]][1];
 						}
-						step+=1;
+						step++;
 					}
-					// 取得各節點的循環週期
 					stepAll.push(step);
 				}
-				// GCD=>LCM (輾轉相除法)
+				// 所有節點需同時達成，即求最小公倍數
 				let count2=stepAll[0];
 				for(let k=1; k<stepAll.length; k++){
+					// GCD => LCM (輾轉相除法)
 					gcd=getGCD(count2, stepAll[k]);
 					count2=count2*stepAll[k]/gcd;
 				}
-				
+
 				function getGCD(n,m){
 					if(n<m){let tmp=m; m=n; n=tmp};
 					if(m==0){
@@ -82,6 +85,7 @@
 						return getGCD(m,n%m);
 					}
 				}
+
 				document.getElementById("result1").innerHTML=count1;
 				document.getElementById("result2").innerHTML=count2;
 			}
