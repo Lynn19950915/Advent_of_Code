@@ -29,6 +29,7 @@
 				// 將文檔內容分行切割，收集於陣列內
 				let arr=work.result.split("\r\n");
 				
+				// --- Part 1 ---
 				let sum1=0;
 				for(let i=0; i<arr.length; i++){
 					// 這個直列目前有多少障礙物
@@ -44,6 +45,7 @@
 						}
 					}
 				}
+				
 				document.getElementById("result1").innerHTML=sum1;
 			}
 		}
