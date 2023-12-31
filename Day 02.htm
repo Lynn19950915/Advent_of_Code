@@ -27,18 +27,18 @@
 			work.readAsText(file);
 			work.onload=function() {
 				// 將文檔內容分行切割，收集於陣列內
-				let arr=work.result.split("\n");
-				let sum1=0, sum2=0;
+				let arr=work.result.split("\r\n");
 				
+				// --- PART 1&2 ---
+				let sum1=0, sum2=0;
 				for(let i=0; i<arr.length; i++){
-					// 測試幾輪都沒差，記住各色出現的最大數量就好
 					let info=arr[i].split(":")[1].replaceAll(";", ",");
 					info=info.split(",");
 					let maxR=0, maxG=0, maxB=0;
 					
+					// 測試幾輪都沒差，記住各色出現的最大數量就好
 					for(let j=0; j<info.length; j++){
-						// \r 符號會影響最末項的比對
-						let item=info[j].replace("\r", "").split(" ");
+						let item=info[j].split(" ");
 						if(item[2]=="red"){maxR=Math.max(item[1]*1, maxR)};
 						if(item[2]=="green"){maxG=Math.max(item[1]*1, maxG)};
 						if(item[2]=="blue"){maxB=Math.max(item[1]*1, maxB)};
@@ -49,6 +49,7 @@
 					}
 					sum2+=(maxR*maxG*maxB);
 				}
+				
 				document.getElementById("result1").innerHTML=sum1;
 				document.getElementById("result2").innerHTML=sum2;
 			}
