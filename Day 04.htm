@@ -27,30 +27,45 @@
 			work.readAsText(file);
 			work.onload=function() {
 				// 將文檔內容分行切割，收集於陣列內
-				let arr=work.result.split("\n");
-				let sum1=0, obj=new Array(arr.length).fill(1), sum2=0;
+				let arr=work.result.split("\r\n");
 				
+				// --- Part 1 ---
+				let sum1=0;
 				for(let i=0; i<arr.length; i++){
 					let info=arr[i].split(":")[1].split("|");
-		
 					// 將中獎數字收集於 Set (並排除空白)
 					let win=new Set(info[0].split(" ").filter(x=>x.length));
-					let num=info[1].replace("\r", "");
-					num=num.split(" ").filter(x=>x.length);
-					let bingo=0;
+					let num=info[1].split(" ").filter(x=>x.length);
 					
-					sum2+=obj[i];
+					let bingo=0;
 					for(let j=0; j<num.length; j++){
 						if(win.has(num[j])){bingo++};
 					}
-					
-					// 將卡片的中獎次數折算為積分
+					// 將中獎的次數折算為積分
 					sum1+=(bingo>0? 2**(bingo-1): 0);
-					// 依中獎的次數去兌換更多卡片
-					while(bingo>0){
-						obj[i+bingo]+=obj[i]; bingo--;
-					}
 				}
+				
+				// --- Part 2 ---
+				// 起始時所有號碼的獎劵各有一張
+				let sum2=0, card=new Array(arr.length).fill(1);
+				
+				for(let k=0; k<arr.length; k++){
+					let info=arr[k].split(":")[1].split("|");
+					// 將中獎數字收集於 Set (並排除空白)
+					let win=new Set(info[0].split(" ").filter(x=>x.length));
+					let num=info[1].split(" ").filter(x=>x.length);
+
+					let bingo=0;
+					for(let l=0; l<num.length; l++){
+						if(win.has(num[l])){bingo++};
+					}
+					// 中獎多少數字，即可往下換幾張刮刮卡
+					while(bingo>0){
+						card[k+bingo]+=card[k]; bingo--;
+					}
+					sum2+=card[k];
+				}
+				
 				document.getElementById("result1").innerHTML=sum1;
 				document.getElementById("result2").innerHTML=sum2;
 			}
