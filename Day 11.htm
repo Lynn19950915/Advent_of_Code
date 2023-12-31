@@ -27,48 +27,50 @@
 			work.readAsText(file);
 			work.onload=function() {
 				// 將文檔內容分行切割，收集於陣列內
-				let arr=work.result.split("\n");
-				let place1=[], place2=[];
+				let arr=work.result.split("\r\n");
 				
+				// --- Part 1&2 ---
 				// 彙整沒有星球的 X,Y 列
-				let empX=[], empY=[];
+				let emptyX=[], emptyY=[];
 				for(let i=0; i<arr.length; i++){
 					arr[i]=arr[i].trim();
 					if(arr[i].split("#").length==1){
-						empY.push(i);
+						emptyY.push(i);
 					}
 				}
 				for(let j=0; j<arr[0].length; j++){
 					if(arr.filter(x=>x[j]=="#").length==0){
-						empX.push(j);
+						emptyX.push(j);
 					}
 				}
 				
-				// 更新膨脹後的 Y 座標
-				let expY=0;
-				for(let i=0; i<arr.length; i++){
-					if(empY[expY]==i){expY++};
-					// 更新膨脹後的 X 座標
-					let expX=0;
-					for(let j=0; j<arr[0].length; j++){
-						if(empX[expX]==j){expX++};
-						if(arr[i][j]=="#"){
-							place1.push([j+expX, i+expY]);
-							place2.push([j+999999*expX, i+999999*expY])
+				let galaxy1=[], galaxy2=[];
+				let expandY=0;
+				for(let k=0; k<arr.length; k++){
+					// 碰到 Y 軸空行就將座標膨脹
+					if(emptyY[expandY]==k){expandY++};
+					let expandX=0;
+					for(let l=0; l<arr[0].length; l++){
+						// 碰到 X 軸空行就將座標膨脹
+						if(emptyX[expandX]==l){expandX++};
+						
+						if(arr[k][l]=="#"){
+							galaxy1.push([l+expandX, k+expandY]);
+							galaxy2.push([l+999999*expandX, k+999999*expandY])
 						}
 					}
 				}
 
-				// Manhattan distance
+				// 星球間的距離 (Manhattan Distance)
 				let sum1=0, sum2=0;
-				for(let k=0; k<place1.length; k++){
-					for(let l=k+1; l<place1.length; l++){
-						let dis1=Math.abs(place1[k][0]-place1[l][0])+Math.abs(place1[k][1]-place1[l][1]);
-						let dis2=Math.abs(place2[k][0]-place2[l][0])+Math.abs(place2[k][1]-place2[l][1]);
-						sum1+=dis1;
-						sum2+=dis2;
+				for(let m=0; m<galaxy1.length; m++){
+					for(let n=m+1; n<galaxy1.length; n++){
+						let dis1=Math.abs(galaxy1[m][0]-galaxy1[n][0])+Math.abs(galaxy1[m][1]-galaxy1[n][1]);
+						let dis2=Math.abs(galaxy2[m][0]-galaxy2[n][0])+Math.abs(galaxy2[m][1]-galaxy2[n][1]);
+						sum1+=dis1; sum2+=dis2;
 					}
 				}
+				
 				document.getElementById("result1").innerHTML=sum1;
 				document.getElementById("result2").innerHTML=sum2;
 			}
