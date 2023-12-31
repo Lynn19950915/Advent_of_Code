@@ -60,6 +60,29 @@
 					sum1+=(numbers[k][0]*=res);
 				}
 				
+				// --- Part 2 ---
+				let gear=[];
+				for(let l=0; l<arr.length; l++){
+					for(let m=0; m<arr[l].length; m++){
+						if(arr[l][m]=="*"){
+							gear.push([l,m]);
+						}
+					}
+				}
+				// 計算與 * 沾邊的有多少數字
+				let sum2=0;
+				for(let n=0; n<gear.length; n++){
+					let res=numbers.filter(x=>
+						// 數字的行數必須在九宮格的上、下界內		 
+						x[1]>=gear[n][0]-1 && x[1]<=gear[n][0]+1 &&
+						// 數字的終點不早於九宮格的左界、起點不晚於九宮格的右界
+						x[3]>=gear[n][1]-1 && x[2]<=gear[n][1]+1
+					);
+					if(res.length==2){
+						sum2+=(res[0][0]*res[1][0]);
+					}
+				}
+				
 				function findSymbol(array){
 					let count=0;
 					// 確保行、列檢測的邊界
@@ -68,10 +91,10 @@
 					let startInd=Math.max(0, array[2]-1);
 					let endInd=Math.min(arr[0].length-1, array[3]+1);
 					
-					for(let l=startRow; l<=endRow; l++){
-						for(let m=startInd; m<=endInd; m++){
+					for(let o=startRow; o<=endRow; o++){
+						for(let p=startInd; p<=endInd; p++){
 							// 若不是數字也非頓點，則視為找到符號
-							if(arr[l][m]!="." && !(arr[l][m]*1>=0 && arr[l][m]*1<=9)){
+							if(arr[o][p]!="." && !(arr[o][p]*1>=0 && arr[o][p]*1<=9)){
 								count+=1;
 							}
 						}
@@ -80,6 +103,7 @@
 				}
 				
 				document.getElementById("result1").innerHTML=sum1;
+				document.getElementById("result2").innerHTML=sum2;
 			}
 		}
 	</script>
@@ -104,7 +128,7 @@
 		<div style="text-align: center">
 			Part 1 答案＝<b><span id="result1" class="answer">？</span></b>
 			<br><br>
-			Part 2 答案＝<b><span id="result2">待解出</span></b>
+			Part 2 答案＝<b><span id="result2" class="answer">？</span></b>
 		</div>
 	</div>
 </body>
