@@ -28,18 +28,74 @@
 			work.onload=function() {
 				// 將文檔內容分行切割，收集於陣列內
 				let arr=work.result.split(",");
-				let sum1=0;
 				
+				// --- Part 1 ---
+				let sum1=0;
 				for(let i=0; i<arr.length; i++){
-					// 計算每個字串 ASCII 餘數並累加
 					let remainder=0;
-					for(let j=0; j<arr[i].length; j++){
-						let ascii=arr[i][j].charCodeAt();
+					// 計算所有字元 ASCII 餘數並累加
+					let res=getHash(arr[i]);
+					sum1+=res;
+				}
+				
+				// --- Part 2 ---
+				let box=new Array(256).fill([]);
+				for(let j=0; j<arr.length; j++){
+					// 字母部分的運算結果，代表箱子號
+					if(arr[j].includes("=")){
+						let part=arr[j].split("=");
+						let target=getHash(part[0]);
+						
+						// 先將巢狀陣列拷貝起來，否則會一併修改
+						let obj=[...box[target]];
+						let index=findExist(part[0], box[target]);
+						// 若存在標籤就修改數值，否則新增該標籤
+						if(index>=0){
+							obj[index][1]=part[1];
+						}else{
+							obj.push([part[0], part[1]]);
+						}
+						box[target]=obj;	
+					}else{
+						let part=arr[j].split("-");
+						let target=getHash(part[0]);
+						
+						// 先將巢狀陣列拷貝起來，否則會一併修改
+						let obj=[...box[target]];
+						let index=findExist(part[0], box[target]);
+						// 若存在標籤就把它刪掉
+						if(index>=0){
+							obj.splice(index,1);
+						}
+						box[target]=obj;
+					}
+				}			
+				let sum2=0;
+				for(let k=0; k<box.length; k++){
+					for(let l=0; l<box[k].length; l++){
+						res=(k+1)*(l+1)*box[k][l][1];
+						sum2+=res;
+					}
+				}
+				
+				function getHash(char){
+					let remainder=0;
+					for(let l=0; l<char.length; l++){
+						let ascii=char[l].charCodeAt();
 						remainder=(remainder+ascii)*17%256;
 					}
-					sum1+=remainder;
+					return remainder;
 				}
+				function findExist(char, arr){
+					let index=-1;
+					for(let m=0; m<arr.length; m++){
+						if(arr[m][0]==char){index=m};
+					}
+					return index;
+				}
+				
 				document.getElementById("result1").innerHTML=sum1;
+				document.getElementById("result2").innerHTML=sum2;
 			}
 		}
 	</script>
@@ -64,7 +120,7 @@
 		<div style="text-align: center">
 			Part 1 答案＝<b><span id="result1" class="answer">？</span></b>
 			<br><br>
-			Part 2 答案＝<b><span id="result2">待解出</span></b>
+			Part 2 答案＝<b><span id="result2" class="answer">？</span></b>
 		</div>
 	</div>
 </body>
