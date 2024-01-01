@@ -31,22 +31,138 @@
 				
 				// --- Part 1 ---
 				let sum1=0;
-				for(let i=0; i<arr.length; i++){
+				for(let i=0; i<arr[0].length; i++){
 					// 這個直列目前有多少障礙物
 					let barrier=0;
-					for(let j=0; j<arr[0].length; j++){
+					for(let j=0; j<arr.length; j++){
 						if(arr[j][i]=="O"){
-							sum1+=(arr.length-stone);
-							stone++;
+							sum1+=(arr.length-barrier);
+							barrier++;
 						}
 						// 石頭(含自己)以上都不能堆填了
 						if(arr[j][i]=="#"){
-							stone=j+1;
+							barrier=j+1;
 						}
 					}
 				}
 				
+				// --- Part 2 ---
+				arr=arr.map(x=>x.split(""));
+				// Spin=北+西+南+東，各移一次
+				for(let k=0; k<1000; k++){
+					arr=toNorth(arr);
+					arr=toWest(arr);
+					arr=toSouth(arr);
+					arr=toEast(arr);
+				}
+				
+				// [Bug] 不可能實際算 10 億次，必定是趨於定值或進入迴圈
+				// [Sol] 跑完前 1000 輪後，用陣列尋找週期的規律
+				let rules=[];
+				while(true){
+					arr=toNorth(arr);
+					arr=toWest(arr);
+					arr=toSouth(arr);
+					arr=toEast(arr);
+
+					let sumNow=0;
+					for(let l=0; l<arr.length; l++){
+						let count=arr[l].filter(x=>x=="O").length;
+						sumNow+=(arr.length-l)*count;
+					}
+					// 重複出現了首項，視為重新循環
+					if(sumNow==rules[0]){break};
+					rules.push(sumNow);
+				}
+				
+				// 解方程式 1000+(N*週期)+X=1000000000
+				let N=Math.floor((1000000000-1000)/rules.length);
+				let X=1000000000-1000-N*rules.length;
+				// 代入 rules[X-1] 即為所求
+				let index=(X-1+rules.length)%rules.length;
+				let sum2=rules[index];
+				
+				function toNorth(array){
+					let place=[];
+					for(let i=0; i<array[0].length; i++){
+						// 這個直列目前有多少障礙物
+						let barrier=0;
+						for(let j=0; j<array.length; j++){
+							if(array[j][i]=="O"){
+								place.push([barrier, i]);
+								barrier++;
+							}
+							// 石頭(含自己)以上都不能堆填了
+							if(array[j][i]=="#"){barrier=j+1};
+						}
+					}
+					return replot(array, place);
+				}
+				function toWest(array){
+					let place=[];
+					for(let i=0; i<arr.length; i++){
+						// 這個橫行目前有多少障礙物
+						let barrier=0;
+						for(let j=0; j<arr[0].length; j++){
+							if(arr[i][j]=="O"){
+								place.push([i, barrier]);
+								barrier++;
+							}
+							// 石頭(含自己)左邊都不能堆填了
+							if(arr[i][j]=="#"){barrier=j+1};
+						}
+					}
+					return replot(array, place);
+				}
+				function toSouth(array){
+					let place=[];
+					for(let i=0; i<arr[0].length; i++){
+						// 這個直列目前有多少障礙物
+						let barrier=arr.length-1;
+						for(let j=arr.length-1; j>=0; j--){
+							if(arr[j][i]=="O"){
+								place.push([barrier, i]);
+								barrier--;
+							}
+							// 石頭(含自己)以下都不能堆填了
+							if(arr[j][i]=="#"){barrier=j-1};
+						}
+					}
+					return replot(array, place);
+				}
+				function toEast(array){
+					let place=[];
+					for(let i=0; i<arr.length; i++){
+						// 這個橫行目前有多少障礙物
+						let barrier=arr[0].length-1;
+						for(let j=arr[0].length-1; j>=0; j--){
+							if(arr[i][j]=="O"){
+								place.push([i, barrier]);
+								barrier--;
+							}
+							// 石頭(含自己)右邊都不能堆填了
+							if(arr[i][j]=="#"){barrier=j-1};
+						}
+					}
+					return replot(array, place);
+				}
+				function replot(arr, points){
+					// 先全部還原再逐一標上 O 位置
+					for(let i=0; i<arr.length; i++){
+						for(let j=0; j<arr[0].length; j++){
+							if(arr[i][j]=="O"){
+								arr[i][j]="."
+							}
+						}
+					}
+					for(let k=0; k<points.length; k++){
+						arr[points[k][0]][points[k][1]]="O";
+					}
+					return arr;
+				}
+				
 				document.getElementById("result1").innerHTML=sum1;
+				document.getElementById("result2").innerHTML=sum2;
 			}
 		}
 	</script>
@@ -71,7 +187,7 @@
 		<div style="text-align: center">
 			Part 1 答案＝<b><span id="result1" class="answer">？</span></b>
 			<br><br>
-			Part 2 答案＝<b><span id="result2">待解出</span></b>
+			Part 2 答案＝<b><span id="result2" class="answer">？</span></b>
 		</div>
 	</div>
 </body>
