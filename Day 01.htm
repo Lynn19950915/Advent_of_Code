@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Day 1: Historian Hysteria</title>
+	<style>
+		.header {
+			margin-top: 100px; text-align: center;
+		}
+		.container {
+			width: 40%; margin: 50px auto; padding: 30px 50px;
+		}
+		.answer {
+			border: 1px solid; padding: 4px;
+			font-size: 20px; color: blue;
+		}
+		a {
+			text-decoration: none;
+		}
+	</style>
+	
+	<script>
+		function execute(){
+			// 讀取檔案
+			let file=document.getElementById("input").files[0];
+			let work=new FileReader();
+			
+			work.readAsText(file);
+			work.onload=function() {
+				// 將文檔內容分行切割，收集於陣列內
+				let row=work.result.split("\r\n");
+				
+				// --- PART 1 ---
+				let sum1=0, arr1=[], arr2=[];
+				for(let i=0; i<row.length; i++){
+					arr1.push(row[i].split("   ")[0]);
+					arr2.push(row[i].split("   ")[1]);
+				}
+				
+				arr1.sort((a,b)=>a-b);
+				arr2.sort((a,b)=>a-b);
+				for(let j=0; j<row.length; j++){
+					sum1+=Math.abs(arr1[j]*1-arr2[j]*1);
+				}
+				
+				// --- PART 2 ---
+				let sum2=0, map={};
+				for(let i=0; i<row.length; i++){
+					let n2=row[i].split("   ")[1];
+					map[n2]=(map[n2]||0)+1;
+				}
+				for(let j=0; j<row.length; j++){
+					let n1=row[j].split("   ")[0];
+					if(map[n1]){sum2+=n1*map[n1]};
+				}
+				
+				document.getElementById("result1").innerHTML=sum1;
+				document.getElementById("result2").innerHTML=sum2;
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<h3 class="header">
+		<a href="https://adventofcode.com/2023/day/1" target="_blank">--- Day 1: Historian Hysteria ---</a>
+	</h3>
+
+	<div class="container" style="background-color: #E0E0E0">
+		<div><b>INPUT</b></div><br>
+		<div style="padding-left: 140px">
+			1. 上傳檔案 (.txt)：<input type="file" id="input" />
+			<br><br>
+			2. 讀取運算：<button onclick="execute()">開始</button>
+		</div>
+	</div>
+	
+	<div class="container" style="background-color: gold">
+		<div><b>OUTPUT</b></div><br>
+		<div style="text-align: center">
+			Part 1 答案＝<b><span id="result1" class="answer">？</span></b>
+			<br><br>
+			Part 2 答案＝<b><span id="result2" class="answer">？</span></b>
+		</div>
+	</div>
+</body>
+</html>
