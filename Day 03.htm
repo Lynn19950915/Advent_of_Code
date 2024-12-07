@@ -62,10 +62,9 @@
 					execute=checkFlag(arr[i], execute);
 				}
 				
-				function checkFlag(arr, state){
+				function checkFlag(arr, state){💛
 					let t1=arr.indexOf("do()");
 					let t2=arr.indexOf("don\'t()");
-					console.log(arr, t1, t2);
 					return t1>t2? true: t1==t2? state: false;
 				}
 				
