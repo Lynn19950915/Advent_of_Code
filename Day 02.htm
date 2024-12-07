@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Day 1: Historian Hysteria</title>
+	<title>Day 2: Red-Nosed Reports</title>
 	<style>
 		.header {
 			margin-top: 100px; text-align: center;
@@ -30,31 +30,26 @@
 				let row=work.result.split("\r\n");
 				
 				// --- PART 1 ---
-				let sum1=0, arr1=[], arr2=[];
+				let res1=0;
 				for(let i=0; i<row.length; i++){
-					arr1.push(row[i].split("   ")[0]);
-					arr2.push(row[i].split("   ")[1]);
+					// 比較前記得轉成數字
+					let arr=row[i].split(" ").map(e=>e*1);
+					if(arr[0]!=arr[1]){
+						res1+=isSafe(arr, arr[0]<arr[1]);
+					}
 				}
 				
-				arr1.sort((a,b)=>a-b);
-				arr2.sort((a,b)=>a-b);
-				for(let j=0; j<row.length; j++){
-					sum1+=Math.abs(arr1[j]*1-arr2[j]*1);
+				function isSafe(arr, more){
+					for(let j=0; j<arr.length-1; j++){
+						let m=arr[j]<arr[j+1];
+						if(m!=more){return false};
+						if(Math.abs(arr[j]-arr[j+1])<1 || Math.abs(arr[j]-arr[j+1])>3){return false};
+					}
+					return true;
 				}
 				
-				// --- PART 2 ---
-				let sum2=0, map={};
-				for(let i=0; i<row.length; i++){
-					let n2=row[i].split("   ")[1];
-					map[n2]=(map[n2]||0)+1;
-				}
-				for(let j=0; j<row.length; j++){
-					let n1=row[j].split("   ")[0];
-					if(map[n1]){sum2+=n1*map[n1]};
-				}
-				
-				document.getElementById("result1").innerHTML=sum1;
-				document.getElementById("result2").innerHTML=sum2;
+				document.getElementById("result1").innerHTML=res1;
+				// document.getElementById("result2").innerHTML=res2;
 			}
 		}
 	</script>
@@ -62,7 +57,7 @@
 
 <body>
 	<h3 class="header">
-		<a href="https://adventofcode.com/2024/day/1" target="_blank">--- Day 1: Historian Hysteria ---</a>
+		<a href="https://adventofcode.com/2024/day/2" target="_blank">--- Day 2: Red-Nosed Reports ---</a>
 	</h3>
 
 	<div class="container" style="background-color: #E0E0E0">

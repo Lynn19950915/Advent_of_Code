@@ -15,7 +15,7 @@
 
 ### 題解一覽
 
-⭐-Earned＝<b>2</b>
+⭐-Earned＝<b>5</b>
 
 參考：<a href="https://adventofcode.com/2024/stats" target="blank">每日實時解出人數</a><br><br>
 
@@ -35,5 +35,21 @@
 				<td align="center">💛</td>
         <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%2001.htm">點我</a></td>
         <td align="center"><a href="Day%2001.htm">點我</a></td>
+    </tr>
+		<tr>
+        <td align="center">12/2</td>
+				<td align="center"><a href="https://adventofcode.com/2024/day/2" target="_blank">Day 2: Red-Nosed Reports</a></td>
+				<td align="center">💙</td>
+				<td align="center"></td>
+        <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%2002.htm">點我</a></td>
+        <td align="center"><a href="Day%2002.htm">點我</a></td>
+    </tr>
+		<tr>
+        <td align="center">12/3</td>
+				<td align="center"><a href="https://adventofcode.com/2024/day/3" target="_blank">Day 3: Mull It Over</a></td>
+				<td align="center">💙</td>
+				<td align="center">💛</td>
+        <td align="center"><a href="https://htmlpreview.github.io/?https://github.com/Lynn19950915/Advent_of_Code/blob/main/Day%2003.htm">點我</a></td>
+        <td align="center"><a href="Day%2003.htm">點我</a></td>
     </tr>
 </table>

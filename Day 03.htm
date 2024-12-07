@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Day 3: Mull It Over</title>
+	<style>
+		.header {
+			margin-top: 100px; text-align: center;
+		}
+		.container {
+			width: 40%; margin: 50px auto; padding: 30px 50px;
+		}
+		.answer {
+			border: 1px solid; padding: 4px;
+			font-size: 20px; color: blue;
+		}
+		a {
+			text-decoration: none;
+		}
+	</style>
+	
+	<script>
+		function execute(){
+			// 讀取檔案
+			let file=document.getElementById("input").files[0];
+			let work=new FileReader();
+			
+			work.readAsText(file);
+			work.onload=function() {
+				let arr=work.result.split("mul(");
+				
+				// --- PART 1 ---
+				let res1=0;
+				for(let i=1; i<arr.length; i++){
+					let sep=arr[i].indexOf(",");
+					let end=arr[i].indexOf(")");
+					
+					let num1=arr[i].substr(0, sep);
+					let num2=arr[i].substr(sep+1, end-sep-1);
+					// 檢查分隔號之間是否為有效數字
+					if(isNum(num1) && isNum(num2)){
+						res1+=(num1)*(num2);
+					}
+				}
+				
+				// --- PART 2 ---
+				let res2=0, execute=true;
+				execute=checkFlag(arr[0], execute);
+				
+				for(let i=1; i<arr.length; i++){
+					if(execute){
+						let sep=arr[i].indexOf(",");
+						let end=arr[i].indexOf(")");
+
+						let num1=arr[i].substr(0, sep);
+						let num2=arr[i].substr(sep+1, end-sep-1);
+						// 檢查分隔號之間是否為有效數字
+						if(isNum(num1) && isNum(num2)){
+							res2+=(num1)*(num2);
+						}
+					}				
+					// 更新運作 Flag
+					execute=checkFlag(arr[i], execute);
+				}
+				
+				function checkFlag(arr, state){
+					let t1=arr.indexOf("do()");
+					let t2=arr.indexOf("don\'t()");
+					console.log(arr, t1, t2);
+					return t1>t2? true: t1==t2? state: false;
+				}
+				
+				function isNum(str){
+					for(let j=0; j<str.length; j++){
+						if(!(str[j]>=0 && str[j]<=9)){
+							return false;
+						}
+					}
+					return true;
+				}
+				
+				document.getElementById("result1").innerHTML=res1;
+				document.getElementById("result2").innerHTML=res2;
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<h3 class="header">
+		<a href="https://adventofcode.com/2024/day/3" target="_blank">--- Day 3: Mull It Over ---</a>
+	</h3>
+
+	<div class="container" style="background-color: #E0E0E0">
+		<div><b>INPUT</b></div><br>
+		<div style="padding-left: 140px">
+			1. 上傳檔案 (.txt)：<input type="file" id="input" />
+			<br><br>
+			2. 讀取運算：<button onclick="execute()">開始</button>
+		</div>
+	</div>
+	
+	<div class="container" style="background-color: gold">
+		<div><b>OUTPUT</b></div><br>
+		<div style="text-align: center">
+			Part 1 答案＝<b><span id="result1" class="answer">？</span></b>
+			<br><br>
+			Part 2 答案＝<b><span id="result2" class="answer">？</span></b>
+		</div>
+	</div>
+</body>
+</html>
