@@ -38,7 +38,7 @@ async function getAnswer() {
 
 		<div id="description">
 			<div>{{ currentDay.summary }}</div>
-			<div id="link">
+			<div id="link1">
 				<!-- 轉型別後，組裝題目的原始連結 -->
 				<a :href="`https://adventofcode.com/2023/day/${Number(currentDay.day)}`" target="_blank">View Full Description</a>
 			</div>
@@ -84,6 +84,28 @@ async function getAnswer() {
 						</div>
 					</div>
 					<div id="answer">{{ answer2? answer2: "🤔" }}</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="solution">
+			<div><b>SOLUTION</b></div>
+			<div id="solTitle">
+				<span id="solType">JS</span>
+				<div id="solName">day_{{ currentDay.day }}.js</div>
+				<div id="link2">
+					<a :href="`https://github.com/Lynn19950915/Advent_of_Code/blob/main/src/data/solutions/day_${currentDay.day}.js`" target="_blank">View Code</a>
+				</div>
+			</div>
+
+			<div id="solCode">
+				<!-- 列出程式原始碼 -->
+				<!-- <pre><code>{{ currentDay.sourceCode }}</code></pre> -->
+
+				<div v-for="(line, index) in currentDay.sourceCode.split('\n')" :key="index" style="line-height: 17px">
+					<!-- 產生程式的行數及註解換色 -->
+					<span class="lineNumber">{{ index+1 }}</span>
+					<code :class="{ comment: line.trim().startsWith('//') }">{{ line }}</code>
 				</div>
 			</div>
 		</div>

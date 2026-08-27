@@ -1,4 +1,5 @@
 import { part1 as sol01_1, part2 as sol01_2 } from "./solutions/day_01"
+import day01_source from "./solutions/day_01.js?raw"
 
 export const days = [
     {
@@ -8,5 +9,6 @@ export const days = [
         stars: 1,
         part1: sol01_1,
         part2: sol01_2,
+        sourceCode: day01_source,
     },
 ]
