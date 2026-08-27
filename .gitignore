@@ -1,0 +1,22 @@
+# Dependencies
+node_modules
+
+# Build
+dist
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Local files
+*.local
+.DS_Store
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# Vite
+*.timestamp-*-*.mjs
