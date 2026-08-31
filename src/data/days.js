@@ -1,5 +1,9 @@
 import { part1 as sol01_1, part2 as sol01_2 } from "./solutions/day_01"
+import { part1 as sol02_1, part2 as sol02_2 } from "./solutions/day_02"
+
+// 顯示在介面上的原始碼文字
 import day01_source from "./solutions/day_01.js?raw"
+import day02_source from "./solutions/day_02.js?raw"
 
 export const days = [
     {
@@ -16,12 +20,15 @@ export const days = [
         title: "Cube Conundrum",
         summary: "Given records of cube games with red, green, and blue cubes revealed across multiple rounds. Identify which games are possible within the cube limits and compute the sum of their IDs.",
         stars: 2,
+        part1: sol02_1,
+        part2: sol02_2,
+        sourceCode: day02_source,
     },
     {
         day: "03",
         title: "Gear Ratios",
         summary: "",
-        stars: 2,
+        stars: 0,
     },
     {
         day: "04",

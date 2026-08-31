@@ -25,9 +25,9 @@ const showDays = computed(() => days.slice(
         </RouterLink>
 
         <div id="pagination">
-            <span class="pageClick" v-show="currentPage > 1" @click="currentPage--">{{ "〈" }}</span>
+            <span class="pageClick" v-show="currentPage > 1" @click="currentPage--">{{ "<" }}</span>
             <span style="padding: 0 15px">{{ (currentPage-1)*10+1 }} - {{ currentPage*10 }}</span>
-            <span class="pageClick" v-show="currentPage < 3" @click="currentPage++">{{ "〉" }}</span>
+            <span class="pageClick" v-show="currentPage < 3" @click="currentPage++">{{ ">" }}</span>
         </div>
     </div>
 </template>
@@ -68,12 +68,10 @@ a {
 
 #pagination {
     width: 50%; margin: 20px auto;
+    font-family: Georgia, 'Times New Roman', Times, serif; font-weight: bold;
     display: flex; justify-content: center;
 }
 .pageClick {
     cursor: pointer;
-}
-#pageNumber {
-    padding: 0 15px;
 }
 </style>
