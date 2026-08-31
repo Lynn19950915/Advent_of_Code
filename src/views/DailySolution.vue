@@ -1,13 +1,23 @@
 <script setup>
-import { computed, ref } from "vue"
-import { useRoute } from "vue-router"
+import { computed, watch, ref } from "vue"
+import { useRoute, useRouter } from "vue-router"
 import { days } from "../data/days.js"
 
 const route = useRoute()
+const router = useRouter()
 // 根據天數取得對應資料
 const currentDay = computed(() => days.find(
 	(item) => item.day == route.params.day
 ))
+// 倘若尚未完成，則該頁不可訪問
+watch(
+	currentDay, (day) => {
+        if (day.stars == 0) {
+            router.replace("/day/01")
+        }
+    },
+    { immediate: true }
+)
 
 const inputFile = ref(null)
 const filesize = ref(0)
@@ -83,7 +93,8 @@ async function getAnswer() {
 							{{ currentDay.stars == 1? "- Unsolved": answer2? "✓ Completed": "○ Ready" }}
 						</div>
 					</div>
-					<div id="answer">{{ answer2? answer2: "🤔" }}</div>
+					<div v-if="answer2" id="answer">{{ answer2 }}</div>
+					<div v-else id="answer" style="color: #FFFFFF">{{ "-" }}</div>
 				</div>
 			</div>
 		</div>
@@ -98,13 +109,13 @@ async function getAnswer() {
 				</div>
 			</div>
 
-			<div id="solCode">
+			<div v-if="currentDay.sourceCode" id="solCode">
 				<!-- 列出程式原始碼 -->
 				<!-- <pre><code>{{ currentDay.sourceCode }}</code></pre> -->
 
-				<div v-for="(line, index) in currentDay.sourceCode.split('\n')" :key="index" style="line-height: 17px">
+				<div v-for="(line, index) in currentDay.sourceCode.split('\n')" :key="index" class="codeLine">
 					<!-- 產生程式的行數及註解換色 -->
-					<span class="lineNumber">{{ index+1 }}</span>
+					<div class="lineNumber">{{ index+1 }}</div>
 					<code :class="{ comment: line.trim().startsWith('//') }">{{ line }}</code>
 				</div>
 			</div>

@@ -22,5 +22,5 @@ export function part1(text) {
 
 // Part 2
 export function part2() {
-    return "";
+    return null;
 }

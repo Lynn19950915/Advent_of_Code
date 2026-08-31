@@ -28,16 +28,17 @@ import Sidebar from "./components/Sidebar.vue"
 
 <style scoped>
 header {
-    width: 70%; margin: auto; padding: 15px 10px;
-    display: flex; justify-content: space-between; align-items: center;
+    width: 70%; margin: auto; padding: 20px 15px;
+    box-sizing: border-box; display: flex; justify-content: space-between; align-items: center;
+    background-color: #FFFFFF;
     border-bottom: 1px solid #E5E5E5;
 }
 a {
     color: #9F08C1; text-decoration: none;
 }
 #container {
-    width: 70%; margin: auto;
-    display: flex;
+    width: 70%; margin: auto; padding: 0px 10px;
+    background-color: #FFFFFF; box-sizing: border-box; display: flex;
 }
 
 header > div {
@@ -52,7 +53,7 @@ header > div {
 #title {
     margin-left: 15px;
     color: #9F08C1;
-    font-size: 18px; font-weight: bold;
+    font-size: 19px; font-weight: bold;
 }
 #author {
     padding: 6px 12px; border: 0.5px solid #9F08C1; border-radius: 5px;
