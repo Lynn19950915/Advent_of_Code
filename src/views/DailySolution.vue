@@ -57,7 +57,11 @@ async function getAnswer() {
 		<div id="upload">
 			<div><b>INPUT</b></div>
 			<div id="section">
-				<div style="color: #9A5590">Upload your puzzle input (.txt)</div>
+				<div style="color: #9A5590">Upload your puzzle input
+					<span id="info">ⓘ
+						<span id="hint">請將 puzzle input 存成 .txt 檔案匯入</span>
+					</span>
+				</div>
 				<div v-if="!inputFile" id="fileBox" style="cursor: pointer">
 					<label for="fileInput">
 						<span>尚無文件，點擊以上傳</span>

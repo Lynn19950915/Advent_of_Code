@@ -1,9 +1,11 @@
 import { part1 as sol01_1, part2 as sol01_2 } from "./solutions/day_01"
 import { part1 as sol02_1, part2 as sol02_2 } from "./solutions/day_02"
+import { part1 as sol04_1, part2 as sol04_2 } from "./solutions/day_04"
 
 // 顯示在介面上的原始碼文字
 import day01_source from "./solutions/day_01.js?raw"
 import day02_source from "./solutions/day_02.js?raw"
+import day04_source from "./solutions/day_04.js?raw"
 
 export const days = [
     {
@@ -33,8 +35,11 @@ export const days = [
     {
         day: "04",
         title: "Scratchcards",
-        summary: "",
-        stars: 0,
+        summary: "Given scratchcards with winning numbers and your numbers. Find the matches and compute the total points.",
+        stars: 2,
+        part1: sol04_1,
+        part2: sol04_2,
+        sourceCode: day04_source,
     },
     {
         day: "05",

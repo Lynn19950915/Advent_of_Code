@@ -3,7 +3,7 @@ import { ref, computed } from "vue"
 import { RouterLink } from "vue-router"
 import { days } from "../data/days.js"
 
-const currentPage = ref(1);
+const currentPage = ref(1)
 const showDays = computed(() => days.slice(
     (currentPage.value-1) * 10, currentPage.value * 10
 ))
@@ -68,7 +68,7 @@ a {
 
 #pagination {
     width: 50%; margin: 20px auto;
-    font-family: Georgia, 'Times New Roman', Times, serif; font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif; font-size: 18px; font-weight: bold;
     display: flex; justify-content: center;
 }
 .pageClick {
