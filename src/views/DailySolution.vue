@@ -9,15 +9,6 @@ const router = useRouter()
 const currentDay = computed(() => days.find(
 	(item) => item.day == route.params.day
 ))
-// 倘若尚未完成，則該頁不可訪問
-watch(
-	currentDay, (day) => {
-        if (day.stars == 0) {
-            router.replace("/day/01")
-        }
-    },
-    { immediate: true }
-)
 
 const inputFile = ref(null)
 const filesize = ref(0)
@@ -41,9 +32,9 @@ async function getAnswer() {
 		<h5 style="color: #9F08C1">Day {{ currentDay.day }}</h5>
 		<div style="display: flex">
 			<div id="title">{{ currentDay.title }}</div>
-			<span id="status">
+			<div id="status">
 				{{ currentDay.stars == 2? "/ solved": currentDay.stars == 1? "/ solving": "" }}
-			</span>
+			</div>
 		</div>
 
 		<div id="description">
@@ -58,16 +49,15 @@ async function getAnswer() {
 			<div><b>INPUT</b></div>
 			<div id="section">
 				<div style="color: #9A5590">Upload your puzzle input
+					<!-- 相對基準排版，內容脫離文檔流 -->
 					<span id="info">ⓘ
 						<span id="hint">請將 puzzle input 存成 .txt 檔案匯入</span>
 					</span>
 				</div>
-				<div v-if="!inputFile" id="fileBox" style="cursor: pointer">
-					<label for="fileInput">
-						<span>尚無文件，點擊以上傳</span>
-					</label>
-				</div>
 
+				<label v-if="!inputFile" for="fileInput" id="fileBox" style="cursor: pointer">
+					<span >尚無文件，點擊以上傳</span>
+				</label>
 				<div v-else>
 					<div id="fileBox">📄 {{ inputFile.name }}｜{{ filesize }} KB</div>
 					<div id="execute" @click="getAnswer">Run Solution ▷</div>
@@ -79,7 +69,7 @@ async function getAnswer() {
 		
 		<div id="result">
 			<div><b>RESULT</b></div>
-			<div id="resultFlex">
+			<div id="resFlex">
 				<div class="solved">
 					<div style="display: flex; justify-content: space-between">
 						<div style="font-size: 14px">Part 1</div>
@@ -113,13 +103,13 @@ async function getAnswer() {
 				</div>
 			</div>
 
-			<div v-if="currentDay.sourceCode" id="solCode">
+			<div id="solCode">
 				<!-- 列出程式原始碼 -->
 				<!-- <pre><code>{{ currentDay.sourceCode }}</code></pre> -->
 
 				<div v-for="(line, index) in currentDay.sourceCode.split('\n')" :key="index" class="codeLine">
-					<!-- 產生程式的行數及註解換色 -->
 					<div class="lineNumber">{{ index+1 }}</div>
+					<!-- 註解會換色，程式碼保持縮排 -->
 					<code :class="{ comment: line.trim().startsWith('//') }">{{ line }}</code>
 				</div>
 			</div>
